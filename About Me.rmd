@@ -5,7 +5,7 @@ date: "7/15/2020"
 output: html_document
 ---
 
-About Me
+#About Me
  From Arlington, TX.
  Work for Dell Technologies.
  Went to Loyola Chicago and UNT for undergrad. Currently enrolled in the Data Science Masters program at SMU.
