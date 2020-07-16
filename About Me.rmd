@@ -1,0 +1,14 @@
+---
+title: "About Me"
+author: "Matt Sherga"
+date: "7/15/2020"
+output: html_document
+---
+
+About Me
+ From Arlington, TX.
+ Work for Dell Technologies.
+ Went to Loyola Chicago and UNT for undergrad. Currently enrolled in the Data Science Masters program at SMU.
+
+
+Please take a moment to look at my Beers & Breweries Case Study I did with Rudranil Mitra, a fellow student.
