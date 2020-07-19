@@ -1,11 +1,11 @@
 ---
 title: "About Me"
 author: "Matt Sherga"
-date: "7/15/2020"
+date: "7/19/2020"
 output: html_document
 ---
 
-#About Me
+
  From Arlington, TX.
  Work for Dell Technologies.
  Went to Loyola Chicago and UNT for undergrad. Currently enrolled in the Data Science Masters program at SMU.

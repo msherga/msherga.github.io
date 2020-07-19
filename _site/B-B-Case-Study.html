@@ -300,6 +300,8 @@ $(document).ready(function () {
 </div>
 
 
+<p><a href="https://drive.google.com/uc?export=download&amp;id=1fDr9Abixv9YD4lMQC_haNv-5_ETvng70" title="brews.csv">Download the wrangled dataset for the app below</a></p>
+<p><a href="https://msherga.shinyapps.io/BB_Study/" title="Case Study App">Go try the app!</a></p>
 <div id="load-the-libraries" class="section level2">
 <h2>Load the libraries</h2>
 <pre class="r"><code># Load the libraries in R 
@@ -412,21 +414,49 @@ brewerydata&lt;-brewerydata %&gt;% rename(&quot;% ABV&quot; = ABV)
 
 #Print the first and the last 6 records in the dataset
 head(brewerydata, 6)</code></pre>
-<pre><code>##   Brewery_id          Beer Beer_ID % ABV IBU                               Style Ounces            Brewery        City State
-## 1          1  Get Together    2692   4.5  50                        American IPA     16 NorthGate Brewing  Minneapolis    MN
-## 2          1 Maggie&#39;s Leap    2691   4.9  26                  Milk / Sweet Stout     16 NorthGate Brewing  Minneapolis    MN
-## 3          1    Wall&#39;s End    2690   4.8  19                   English Brown Ale     16 NorthGate Brewing  Minneapolis    MN
-## 4          1       Pumpion    2689   6.0  38                         Pumpkin Ale     16 NorthGate Brewing  Minneapolis    MN
-## 5          1    Stronghold    2688   6.0  25                     American Porter     16 NorthGate Brewing  Minneapolis    MN
-## 6          1   Parapet ESB    2687   5.6  47 Extra Special / Strong Bitter (ESB)     16 NorthGate Brewing  Minneapolis    MN</code></pre>
+<pre><code>##   Brewery_id          Beer Beer_ID % ABV IBU
+## 1          1  Get Together    2692   4.5  50
+## 2          1 Maggie&#39;s Leap    2691   4.9  26
+## 3          1    Wall&#39;s End    2690   4.8  19
+## 4          1       Pumpion    2689   6.0  38
+## 5          1    Stronghold    2688   6.0  25
+## 6          1   Parapet ESB    2687   5.6  47
+##                                 Style Ounces            Brewery        City
+## 1                        American IPA     16 NorthGate Brewing  Minneapolis
+## 2                  Milk / Sweet Stout     16 NorthGate Brewing  Minneapolis
+## 3                   English Brown Ale     16 NorthGate Brewing  Minneapolis
+## 4                         Pumpkin Ale     16 NorthGate Brewing  Minneapolis
+## 5                     American Porter     16 NorthGate Brewing  Minneapolis
+## 6 Extra Special / Strong Bitter (ESB)     16 NorthGate Brewing  Minneapolis
+##   State
+## 1    MN
+## 2    MN
+## 3    MN
+## 4    MN
+## 5    MN
+## 6    MN</code></pre>
 <pre class="r"><code>tail(brewerydata, 6)</code></pre>
-<pre><code>##      Brewery_id                      Beer Beer_ID % ABV IBU                   Style Ounces                       Brewery          City State
-## 2405        556             Pilsner Ukiah      98   5.5  NA         German Pilsener     12         Ukiah Brewing Company         Ukiah    CA
-## 2406        557  Heinnieweisse Weissebier      52   4.9  NA              Hefeweizen     12       Butternuts Beer and Ale Garrattsville    NY
-## 2407        557           Snapperhead IPA      51   6.8  NA            American IPA     12       Butternuts Beer and Ale Garrattsville    NY
-## 2408        557         Moo Thunder Stout      50   4.9  NA      Milk / Sweet Stout     12       Butternuts Beer and Ale Garrattsville    NY
-## 2409        557         Porkslap Pale Ale      49   4.3  NA American Pale Ale (APA)     12       Butternuts Beer and Ale Garrattsville    NY
-## 2410        558 Urban Wilderness Pale Ale      30   4.9  NA        English Pale Ale     12 Sleeping Lady Brewing Company     Anchorage    AK</code></pre>
+<pre><code>##      Brewery_id                      Beer Beer_ID % ABV IBU
+## 2405        556             Pilsner Ukiah      98   5.5  NA
+## 2406        557  Heinnieweisse Weissebier      52   4.9  NA
+## 2407        557           Snapperhead IPA      51   6.8  NA
+## 2408        557         Moo Thunder Stout      50   4.9  NA
+## 2409        557         Porkslap Pale Ale      49   4.3  NA
+## 2410        558 Urban Wilderness Pale Ale      30   4.9  NA
+##                        Style Ounces                       Brewery          City
+## 2405         German Pilsener     12         Ukiah Brewing Company         Ukiah
+## 2406              Hefeweizen     12       Butternuts Beer and Ale Garrattsville
+## 2407            American IPA     12       Butternuts Beer and Ale Garrattsville
+## 2408      Milk / Sweet Stout     12       Butternuts Beer and Ale Garrattsville
+## 2409 American Pale Ale (APA)     12       Butternuts Beer and Ale Garrattsville
+## 2410        English Pale Ale     12 Sleeping Lady Brewing Company     Anchorage
+##      State
+## 2405    CA
+## 2406    NY
+## 2407    NY
+## 2408    NY
+## 2409    NY
+## 2410    AK</code></pre>
 </div>
 <div id="address-the-missing-values-in-each-column" class="section level2">
 <h2>Address the missing values in each column</h2>

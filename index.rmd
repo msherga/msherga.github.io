@@ -1,11 +1,9 @@
 ---
 title: "Website"
 author: "Matt Sherga"
-date: "7/15/2020"
+date: "7/19/2020"
 output: html_document
 ---
 
 # MSherga Website
-## Lines above are YAML tags
-###Knit RMD to HTML
-Then push index.html to github.io repo.
+## Take a look at my Case Study!

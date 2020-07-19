@@ -1,0 +1,12 @@
+name: BB_Study
+title: BB_Study
+username:
+account: msherga
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2590442
+bundleId: 3409791
+url: https://msherga.shinyapps.io/BB_Study/
+when: 1595194277.29097
+asMultiple: FALSE
+asStatic: FALSE
