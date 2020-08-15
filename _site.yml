@@ -7,6 +7,6 @@ navbar:
     - text: "Case Study 1"
       href: B-B-Case-Study.html
     - text: "Case Study 2"
-      href: casestudy2-htmlmkdwn
+      href: casestudy2-htmlmkdwn.html
     - text: "About"
       href: About-Me.html
