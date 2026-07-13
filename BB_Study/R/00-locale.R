@@ -6,3 +6,4 @@ if (inherits(locale_result, "try-error") || identical(locale_result, "")) {
 }
 
 options(encoding = "UTF-8")
+message("BB_Study LC_CTYPE: ", Sys.getlocale("LC_CTYPE"))
