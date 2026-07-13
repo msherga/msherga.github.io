@@ -25,18 +25,21 @@ jobs:
       - name: Install R packages
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          cache-version: 3
           extra-packages: |
             any::shiny
             any::rsconnect
             any::dplyr
             any::ggplot2
+            any::cpp11
+            any::isoband
           needs: |
             website
 
       - name: Verify required packages
         shell: bash
         run: |
-          Rscript -e 'stopifnot(requireNamespace("rsconnect", quietly = TRUE), requireNamespace("shiny", quietly = TRUE), requireNamespace("dplyr", quietly = TRUE), requireNamespace("ggplot2", quietly = TRUE))'
+          Rscript -e 'stopifnot(requireNamespace("rsconnect", quietly = TRUE), requireNamespace("shiny", quietly = TRUE), requireNamespace("dplyr", quietly = TRUE), requireNamespace("ggplot2", quietly = TRUE), requireNamespace("cpp11", quietly = TRUE), requireNamespace("isoband", quietly = TRUE))'
 
       - name: Configure shinyapps.io account
         shell: bash
