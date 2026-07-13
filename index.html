@@ -1,359 +1,1150 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, and homelab projects.">
+  <meta name="author" content="Matt Sherga">
+  <meta name="theme-color" content="#08111f">
+  <meta property="og:title" content="Matt Sherga | Systems, Software & Infrastructure">
+  <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, and secure self-hosted infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sherga.net/">
+  <title>Matt Sherga | Systems, Software, & Infrastructure</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+  <style>
+    :root {
+      --bg: #07101d;
+      --bg-elevated: #0b1728;
+      --panel: rgba(14, 30, 50, 0.76);
+      --panel-strong: #10223a;
+      --text: #f4f7fb;
+      --muted: #9fb1c7;
+      --line: rgba(151, 184, 219, 0.16);
+      --accent: #59d8ff;
+      --accent-2: #82f0c6;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
 
-<meta name="author" content="Matt Sherga" />
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
 
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(89, 216, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at 88% 18%, rgba(130, 240, 198, 0.08), transparent 24rem),
+        linear-gradient(180deg, #07101d 0%, #081321 48%, #07101d 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-<title>Website</title>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+    a {
+      color: inherit;
+    }
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      padding: 10px 14px;
+      color: #00141c;
+      background: var(--accent);
+      border-radius: 10px;
+      transform: translateY(-160%);
+      transition: transform 160ms ease;
+    }
 
+    .skip-link:focus {
+      transform: translateY(0);
+    }
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 16, 29, 0.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
 
+    .nav-wrap {
+      width: min(calc(100% - 36px), var(--max-width));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 780;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
 
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      color: #00151d;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(89, 216, 255, 0.2);
+    }
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-</style>
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
+    .nav-links a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--muted);
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 650;
+      transition: color 160ms ease, background 160ms ease;
+    }
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      outline: none;
+    }
 
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    .menu-button {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+    }
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+    .menu-button svg {
+      width: 22px;
+      height: 22px;
+    }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
+    main {
+      display: block;
+    }
 
-<!-- tabsets -->
+    .shell {
+      width: min(calc(100% - 36px), var(--max-width));
+      margin: 0 auto;
+    }
 
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.22fr) minmax(310px, 0.78fr);
+      align-items: center;
+      gap: clamp(42px, 8vw, 96px);
+      padding: 82px 0 74px;
+    }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--accent-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: currentColor;
+    }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
 
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
+    h1 {
+      max-width: 850px;
+      margin-bottom: 24px;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+    }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(100deg, var(--accent), #b7e8ff 52%, var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
+    .hero-copy {
+      max-width: 760px;
+      margin-bottom: 32px;
+      color: #bdcad9;
+      font-size: clamp(1.08rem, 1.7vw, 1.34rem);
+    }
 
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 42px;
+    }
 
-<!-- code folding -->
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      text-decoration: none;
+      font-weight: 760;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
 
+    .button:hover {
+      transform: translateY(-2px);
+    }
 
+    .button-primary {
+      color: #00151c;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 34px rgba(89, 216, 255, 0.2);
+    }
 
+    .button-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      border-color: var(--line);
+    }
 
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.075);
+      border-color: rgba(89, 216, 255, 0.4);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag {
+      padding: 7px 11px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .terminal-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(16, 34, 58, 0.96), rgba(8, 22, 38, 0.92));
+      border: 1px solid rgba(151, 184, 219, 0.2);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      transform: rotate(1.2deg);
+    }
+
+    .terminal-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 30%, rgba(89, 216, 255, 0.07), transparent 64%);
+      transform: translateX(-100%);
+      animation: sheen 8s ease-in-out infinite;
+    }
+
+    @keyframes sheen {
+      0%, 68% { transform: translateX(-100%); }
+      86%, 100% { transform: translateX(100%); }
+    }
+
+    .terminal-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff6b72;
+    }
+
+    .dot:nth-child(2) { background: #ffd166; }
+    .dot:nth-child(3) { background: #69e39b; }
+
+    .terminal-title {
+      margin-left: auto;
+      color: #7690aa;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.72rem;
+    }
+
+    .terminal-body {
+      padding: 26px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: clamp(0.78rem, 1.25vw, 0.94rem);
+      line-height: 1.85;
+    }
+
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      color: #abc0d5;
+      border-bottom: 1px dashed rgba(151, 184, 219, 0.12);
+    }
+
+    .terminal-line:last-child {
+      border-bottom: 0;
+    }
+
+    .terminal-key {
+      color: var(--accent);
+    }
+
+    .terminal-value {
+      color: var(--accent-2);
+      text-align: right;
+    }
+
+    .section {
+      padding: 96px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.68fr) minmax(300px, 1fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 24px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 38px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.18);
+    }
+
+    .panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .panel-lead {
+      color: #dce7f3;
+      font-size: clamp(1.15rem, 2vw, 1.42rem);
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .stat {
+      min-height: 128px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--accent);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card,
+    .study-card,
+    .service-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
+      padding: 28px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(15, 33, 55, 0.92), rgba(9, 23, 39, 0.88));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .project-card:hover,
+    .study-card:hover,
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(89, 216, 255, 0.35);
+      background: linear-gradient(145deg, rgba(18, 39, 65, 0.96), rgba(10, 27, 45, 0.92));
+    }
+
+    .card-number {
+      margin-bottom: auto;
+      color: #6f8ba6;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.78rem;
+    }
+
+    .project-card h3,
+    .study-card h3,
+    .service-card h3 {
+      margin: 42px 0 10px;
+      font-size: 1.46rem;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+    }
+
+    .project-card p,
+    .study-card p,
+    .service-card p {
+      color: var(--muted);
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .card-meta span {
+      padding: 6px 9px;
+      color: #adc0d5;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .arch-node {
+      position: relative;
+      min-height: 162px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .arch-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      z-index: 2;
+      width: 27px;
+      color: var(--accent);
+      text-align: center;
+      transform: translateY(-50%);
+    }
+
+    .arch-node small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--accent-2);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .arch-node strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+    }
+
+    .arch-node span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .study-card {
+      min-height: 340px;
+    }
+
+    .study-link,
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 24px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 760;
+    }
+
+    .study-link:hover,
+    .service-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      min-height: 252px;
+      padding: 23px;
+    }
+
+    .service-card h3 {
+      margin-top: 28px;
+    }
+
+    .service-status {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 7px;
+      padding: 6px 9px;
+      color: #b9cadd;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .service-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--accent-2);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(130, 240, 198, 0.55);
+    }
+
+    .service-status.private::before {
+      background: #ffd166;
+      box-shadow: 0 0 12px rgba(255, 209, 102, 0.38);
+    }
+
+    .service-card.private {
+      opacity: 0.78;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 40px;
+      align-items: center;
+      padding: clamp(30px, 6vw, 64px);
+      background:
+        radial-gradient(circle at 85% 15%, rgba(130, 240, 198, 0.11), transparent 18rem),
+        linear-gradient(145deg, rgba(17, 38, 64, 0.98), rgba(9, 24, 41, 0.96));
+      border: 1px solid rgba(89, 216, 255, 0.25);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-panel p {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-actions .button {
+      width: 100%;
+    }
+
+    .site-footer {
+      padding: 34px 0 44px;
+      color: #7189a3;
+      font-size: 0.82rem;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-row a {
+      color: #9fb1c7;
+      text-decoration: none;
+    }
+
+    .footer-row a:hover {
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 18px;
+        left: 18px;
+        display: none;
+        padding: 10px;
+        background: rgba(8, 19, 33, 0.98);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: grid;
+      }
+
+      .nav-links a {
+        padding: 12px 14px;
+      }
+
+      .menu-button {
+        display: inline-flex;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 72px;
+      }
+
+      .terminal-card {
+        max-width: 720px;
+        transform: none;
+      }
+
+      .section-heading,
+      .about-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .architecture {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .arch-node:not(:last-child)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell,
+      .nav-wrap {
+        width: min(calc(100% - 24px), var(--max-width));
+      }
+
+      h1 {
+        font-size: clamp(3rem, 17vw, 5.1rem);
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-heading {
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .card-grid,
+      .services-grid,
+      .architecture,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card,
+      .study-card {
+        min-height: 290px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .terminal-body {
+        padding: 20px;
+      }
+
+      .terminal-line {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 7px 0;
+      }
+
+      .terminal-value {
+        text-align: left;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Matt Sherga home">
+        <span class="brand-mark" aria-hidden="true">MS</span>
+        <span>Matt Sherga</span>
+      </a>
 
-<div class="container-fluid main-container">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
       </button>
-      <a class="navbar-brand" href="index.html">My Website</a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#homelab">Homelab</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#services">Lab Access</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="shell hero" id="home">
+      <div>
+        <p class="eyebrow">Systems · Software · Infrastructure</p>
+        <h1>Building systems that <span class="gradient-text">work together.</span></h1>
+        <p class="hero-copy">
+          I design, automate, and troubleshoot environments spanning software, virtualization, networking, storage, data, and home automation—then make the complicated parts manageable.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">My personal projects</a>
+          <a class="button button-secondary" href="mailto:jobs@sherga.net">Email me!</a>
+        </div>
+        <div class="hero-tags" aria-label="Core technologies">
+          <span class="tag">Proxmox</span>
+          <span class="tag">pfSense</span>
+          <span class="tag">Cloudflare</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Home Assistant</span>
+          <span class="tag">PowerShell</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+
+      <aside class="terminal-card" aria-label="Homelab overview">
+        <div class="terminal-head">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="terminal-title">sherga.net / system overview</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="terminal-key">platform</span><span class="terminal-value">Proxmox VE</span></div>
+          <div class="terminal-line"><span class="terminal-key">network</span><span class="terminal-value">2.5 GbE + VLANs</span></div>
+          <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">48 TB mirrored ZFS</span></div>
+          <div class="terminal-line"><span class="terminal-key">edge</span><span class="terminal-value">pfSense + Cloudflare</span></div>
+          <div class="terminal-line"><span class="terminal-key">automation</span><span class="terminal-value">Home Assistant</span></div>
+          <div class="terminal-line"><span class="terminal-key">services</span><span class="terminal-value">Docker + LXC</span></div>
+          <div class="terminal-line"><span class="terminal-key">status</span><span class="terminal-value">Always evolving</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="about">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Technical breadth without losing the details.</h2>
+          <p>
+            My work sits at the intersection of infrastructure, software, data, and operations. I enjoy understanding how every layer fits together—from physical hardware and network paths to applications, automations, and the people using them.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="panel reveal">
+            <p class="panel-lead">
+              I bring enterprise infrastructure experience, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.
+            </p>
+            <p>
+              That combination has taught me to approach technical problems from both directions: zoom out far enough to design the right system, then zoom in far enough to find the one configuration, dependency, or assumption causing trouble.
+            </p>
+            <p>
+              This site brings together my professional interests, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.
+            </p>
+          </article>
+
+          <aside class="panel stats reveal" aria-label="Homelab statistics">
+            <div class="stat"><strong>10+</strong><span>self-hosted applications and infrastructure services</span></div>
+            <div class="stat"><strong>3</strong><span>segmented network zones for trusted, IoT, and guest devices</span></div>
+            <div class="stat"><strong>2.5G</strong><span>core Ethernet connectivity across the primary lab</span></div>
+            <div class="stat"><strong>24/7</strong><span>automation, monitoring, media, storage, and remote access</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Selected projects.</h2>
+          <p>Practical systems built to solve real problems.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="project-card reveal">
+            <span class="card-number">01 / PLATFORM</span>
+            <h3>Virtualization and storage platform</h3>
+            <p>A Proxmox environment hosting virtual machines and Linux containers, backed by ZFS storage, GPU-enabled workloads, centralized backups, and service-specific mount design.</p>
+            <div class="card-meta"><span>Proxmox VE</span><span>ZFS</span><span>LXC</span><span>PBS</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <span class="card-number">02 / NETWORK</span>
+            <h3>Segmented and securely published network</h3>
+            <p>A pfSense-centered network with VLAN isolation, internal DNS, WireGuard and Tailscale access, HAProxy routing, automated certificates, and Cloudflare-proxied services.</p>
+            <div class="card-meta"><span>pfSense</span><span>VLANs</span><span>HAProxy</span><span>WireGuard</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <span class="card-number">03 / AUTOMATION</span>
+            <h3>Home automation and local intelligence</h3>
+            <p>A dedicated Home Assistant system coordinating cameras, sensors, Zigbee, Z-Wave, Matter, MQTT, media, presence, and local voice and AI experiments.</p>
+            <div class="card-meta"><span>Home Assistant</span><span>Frigate</span><span>MQTT</span><span>Local AI</span></div>
+          </article>
+
+          <article class="project-card reveal">
+            <span class="card-number">04 / TOOLING</span>
+            <h3>Operational scripting and workflow automation</h3>
+            <p>PowerShell, shell, and Python tooling for remote inventory collection, backups, media processing, bulk data handling, system migration, and repeatable administration.</p>
+            <div class="card-meta"><span>PowerShell</span><span>Python</span><span>Bash</span><span>Automation</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="homelab">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>A homelab designed like a small production environment.</h2>
+          <p>Layered networking, deliberate trust boundaries, redundant storage, service isolation, remote access, monitoring, and recovery all work as one system.</p>
+        </div>
+
+        <div class="panel architecture reveal" aria-label="High-level homelab architecture">
+          <div class="arch-node"><small>Internet edge</small><strong>Cloudflare</strong><span>DNS, proxying, TLS, email routing, and protected external access.</span></div>
+          <div class="arch-node"><small>Gateway</small><strong>pfSense</strong><span>Firewalling, routing, VLANs, VPNs, DNS, certificates, and reverse proxy.</span></div>
+          <div class="arch-node"><small>Core</small><strong>2.5 GbE network</strong><span>Managed switching, PoE edge devices, access points, and segmented clients.</span></div>
+          <div class="arch-node"><small>Compute</small><strong>Proxmox + HAOS</strong><span>Containerized services, virtual machines, automation, cameras, and GPU workloads.</span></div>
+          <div class="arch-node"><small>Data</small><strong>ZFS + backups</strong><span>Mirrored bulk storage, SSD workloads, snapshots, and Proxmox Backup Server.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="case-studies">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Graduate data case studies.</h2>
+          <p>Original work from my Master's program, preserved here while the presentation is gradually modernized.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="study-card reveal">
+            <span class="card-number">CASE STUDY 01</span>
+            <h3>Beer and Breweries</h3>
+            <p>Exploratory data analysis, statistical comparisons, geographic trends, data wrangling, visualization, and an interactive R Shiny application built from U.S. beer and brewery datasets.</p>
+            <div class="card-meta"><span>R</span><span>ggplot2</span><span>Statistics</span><span>Shiny</span></div>
+            <a class="study-link" href="B-B-Case-Study.html">Read the original study <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="study-card reveal">
+            <span class="card-number">CASE STUDY 02</span>
+            <h3>Employee Attrition and Income Modeling</h3>
+            <p>Employee-data analysis focused on attrition drivers, job-role trends, Naïve Bayes classification, and regression modeling for monthly income.</p>
+            <div class="card-meta"><span>R</span><span>Naïve Bayes</span><span>Regression</span><span>EDA</span></div>
+            <a class="study-link" href="casestudy2-htmlmkdwn.html">Read the original study <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Lab access.</h2>
+          <p>A launch point for selected self-hosted services. Each application keeps its own authentication and access controls; sensitive administration remains private.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <span class="service-status">Available</span>
+            <h3>Home Assistant</h3>
+            <p>Automation, device control, dashboards, cameras, energy, and household integrations.</p>
+            <a class="service-link" href="https://haos.sherga.net" target="_blank" rel="noopener noreferrer">Open service <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-status">Available</span>
+            <h3>File Browser</h3>
+            <p>Authenticated access to shared files and selected homelab storage.</p>
+            <a class="service-link" href="https://cloud.sherga.net" target="_blank" rel="noopener noreferrer">Open service <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="service-card private reveal">
+            <span class="service-status private">Private</span>
+            <h3>Proxmox</h3>
+            <p>Virtualization management is intentionally restricted to trusted local and VPN connections.</p>
+          </article>
+
+          <article class="service-card private reveal">
+            <span class="service-status private">Private</span>
+            <h3>Network Admin</h3>
+            <p>Firewall, switching, storage, and infrastructure management remain off the public edge.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell">
+        <div class="contact-panel reveal">
+          <div>
+            <p class="eyebrow">Get in touch</p>
+            <h2>Let's talk systems.</h2>
+            <p>For professional opportunities, technical collaboration, or a good infrastructure rabbit hole, email is the best place to reach me.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:jobs@sherga.net">Email me</a>
+            <a class="button button-secondary" href="https://github.com/msherga" target="_blank" rel="noopener noreferrer">View GitHub profile <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span>© <span id="year"></span> Matt Sherga. Built for sherga.net.</span>
+      <a href="#home">Back to top ↑</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="B-B-Case-Study.html">Case Study 1</a>
-</li>
-<li>
-  <a href="casestudy2-htmlmkdwn.html">Case Study 2</a>
-</li>
-<li>
-  <a href="About-Me.html">About</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+  </footer>
 
-<div class="fluid-row" id="header">
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.querySelector('.nav-links');
+    const navAnchors = document.querySelectorAll('.nav-links a');
 
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
 
+    navAnchors.forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+      });
+    });
 
-<h1 class="title toc-ignore">Website</h1>
-<h4 class="author">Matt Sherga</h4>
-<h4 class="date">8/15/2020</h4>
+    document.addEventListener('click', (event) => {
+      if (!navLinks.contains(event.target) && !menuButton.contains(event.target)) {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-</div>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
+    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
-<div id="msherga-website" class="section level1">
-<h1>MSherga Website</h1>
-<div id="take-a-look-at-my-case-study" class="section level2">
-<h2>Take a look at my Case Study!</h2>
-</div>
-</div>
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const activeLinkObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navAnchors.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: '-32% 0px -58% 0px' });
 
-
-
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
+    sections.forEach((section) => activeLinkObserver.observe(section));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
