@@ -49,4 +49,4 @@ jobs:
       - name: Deploy BB_Study
         shell: bash
         run: |
-          Rscript -e 'rsconnect::deployApp(appDir = "BB_Study", appName = "BB_Study", account = Sys.getenv("SHINYAPPS_ACCOUNT"), forceUpdate = TRUE, launch.browser = FALSE)'
+          Rscript -e 'rsconnect::deployApp(appDir = "BB_Study", appFiles = c("ui.R", "server.R", "R/00-locale.R"), appId = 2590442, appMode = "shiny", account = Sys.getenv("SHINYAPPS_ACCOUNT"), forceUpdate = TRUE, launch.browser = FALSE)'
