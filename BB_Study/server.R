@@ -67,13 +67,28 @@ shinyServer(function(input, output, session) {
             need(nrow(df) > 0, "No rows match the selected states.")
         )
 
-        # Quantity of breweries by state
-        brewbystate <- data.frame(
-            df %>%
-                group_by(State) %>%
-                tally() %>%
+        # Count unique breweries, not beer rows. The merged dataset contains
+        # multiple beers for each brewery.
+        if ("Brewery_id" %in% names(df)) {
+            brewbystate <- df %>%
+                distinct(State, Brewery_id) %>%
+                count(State, name = "n") %>%
                 arrange(desc(n))
-        )
+        } else if ("Brewery" %in% names(df)) {
+            brewbystate <- df %>%
+                distinct(State, Brewery) %>%
+                count(State, name = "n") %>%
+                arrange(desc(n))
+        } else {
+            validate(
+                need(
+                    FALSE,
+                    "The dataset must contain Brewery_id or Brewery to count breweries."
+                )
+            )
+        }
+
+        brewbystate <- data.frame(brewbystate)
 
         brewbystateplot <- brewbystate %>%
             ggplot(aes(x = reorder(as.factor(State), -n), y = n)) +
