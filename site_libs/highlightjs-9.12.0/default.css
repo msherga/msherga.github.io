@@ -19,3 +19,11 @@
 .hljs-string {
   color: #d14;
 }
+
+/* Keep the rendered R Markdown case studies as standalone pages. */
+.navbar.navbar-default.navbar-fixed-top {
+  display: none !important;
+}
+
+body {
+  padding-top: 
