@@ -12,7 +12,7 @@ fig_height: 10
 knitr::opts_chunk$set(message = FALSE)
 ```
 
-[Download the wrangled dataset for the app below](https://drive.google.com/uc?export=download&id=1fDr9Abixv9YD4lMQC_haNv-5_ETvng70 "brews.csv")
+[Download the wrangled dataset for the app below](https://github.com/msherga/msherga.github.io/raw/refs/heads/sherga-redesign/brews.csv "brews.csv")
 
 [Go try the app!](https://msherga.shinyapps.io/BB_Study/ "Case Study App")
 
