@@ -1,29 +1,543 @@
-.hljs-literal {
-  color: #990073;
+/* Syntax highlighting */
+.hljs-literal { color: #c792ea; }
+.hljs-number { color: #89ddff; }
+.hljs-comment { color: #7189a3; font-style: italic; }
+.hljs-keyword { color: #ff7b9c; font-weight: 700; }
+.hljs-string { color: #82f0c6; }
+
+/*
+ * Shared presentation layer for the legacy R Markdown case studies.
+ * The generated HTML remains intact; this stylesheet makes it feel like
+ * part of the modern sherga.net portfolio without touching the analysis.
+ */
+
+:root {
+  --cs-bg: #07101d;
+  --cs-bg-soft: #0b1728;
+  --cs-panel: rgba(14, 30, 50, 0.88);
+  --cs-panel-strong: #10223a;
+  --cs-text: #f4f7fb;
+  --cs-muted: #a8bad0;
+  --cs-line: rgba(151, 184, 219, 0.18);
+  --cs-accent: #59d8ff;
+  --cs-accent-2: #82f0c6;
+  --cs-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
 }
 
-.hljs-number {
-  color: #099;
-}
-
-.hljs-comment {
-  color: #998;
-  font-style: italic;
-}
-
-.hljs-keyword {
-  color: #900;
-  font-weight: bold;
-}
-
-.hljs-string {
-  color: #d14;
-}
-
-/* Keep the rendered R Markdown case studies as standalone pages. */
-.navbar.navbar-default.navbar-fixed-top {
-  display: none !important;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  padding-top: 
+  min-width: 320px;
+  padding-top: 86px !important;
+  padding-bottom: 72px !important;
+  color: var(--cs-text) !important;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(89, 216, 255, 0.12), transparent 30rem),
+    radial-gradient(circle at 88% 14%, rgba(130, 240, 198, 0.075), transparent 26rem),
+    linear-gradient(180deg, #07101d 0%, #081321 48%, #07101d 100%) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 16px;
+  line-height: 1.72 !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 78%);
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.main-container {
+  width: min(calc(100% - 36px), 1120px) !important;
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* Modernized legacy navigation */
+.navbar.navbar-default.navbar-fixed-top {
+  display: block !important;
+  min-height: 64px;
+  margin: 0;
+  background: rgba(7, 16, 29, 0.9) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--cs-line) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.navbar > .container {
+  width: min(calc(100% - 36px), 1120px) !important;
+  max-width: 1120px !important;
+}
+
+.navbar-header,
+.navbar-collapse {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.navbar-brand {
+  height: 64px !important;
+  padding: 21px 0 !important;
+  color: var(--cs-text) !important;
+  font-size: 0 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em;
+}
+
+.navbar-brand::before {
+  content: "Matt Sherga";
+  font-size: 17px;
+}
+
+.navbar-nav > li > a {
+  margin: 10px 2px;
+  padding: 12px 13px !important;
+  color: var(--cs-muted) !important;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 20px !important;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+  color: var(--cs-text) !important;
+  background: rgba(255, 255, 255, 0.065) !important;
+}
+
+.navbar-nav a[href="About-Me.html"] {
+  display: none !important;
+}
+
+.navbar-toggle {
+  margin-top: 14px !important;
+  margin-right: 0 !important;
+  border-color: var(--cs-line) !important;
+  border-radius: 10px !important;
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.navbar-toggle .icon-bar {
+  background: var(--cs-text) !important;
+}
+
+/* Hero/title block */
+#header {
+  position: relative;
+  margin: 22px 0 42px;
+  padding: clamp(30px, 6vw, 64px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(130, 240, 198, 0.12), transparent 20rem),
+    linear-gradient(145deg, rgba(17, 38, 64, 0.98), rgba(9, 24, 41, 0.97));
+  border: 1px solid rgba(89, 216, 255, 0.24);
+  border-radius: 26px;
+  box-shadow: var(--cs-shadow);
+}
+
+#header::before {
+  content: "CASE STUDY";
+  display: block;
+  margin-bottom: 17px;
+  color: var(--cs-accent-2);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.17em;
+}
+
+#header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cs-accent), var(--cs-accent-2), transparent 82%);
+}
+
+h1.title {
+  max-width: 900px;
+  margin: 0 0 18px !important;
+  color: var(--cs-text) !important;
+  font-size: clamp(2.6rem, 7vw, 5.7rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.055em;
+}
+
+/* Give the older generic title a more useful presentation without changing its source document. */
+.main-container:has(#description) h1.title {
+  font-size: 0 !important;
+}
+
+.main-container:has(#description) h1.title::after {
+  content: "Employee Attrition and Income Modeling";
+  display: block;
+  max-width: 900px;
+  font-size: clamp(2.6rem, 7vw, 5.7rem) !important;
+  font-weight: 800 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.055em;
+}
+
+#header h4.author,
+#header h4.date {
+  display: inline-block;
+  margin: 0 16px 0 0 !important;
+  color: var(--cs-muted) !important;
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+}
+
+#header h4.date::before {
+  content: "· ";
+  color: var(--cs-accent);
+}
+
+/* Primary resource links directly beneath the title become actions. */
+#header + p,
+#header + p + p {
+  display: inline-block;
+  margin: -16px 10px 42px 0 !important;
+}
+
+#header + p a,
+#header + p + p a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 16px;
+  color: #00151c !important;
+  background: linear-gradient(135deg, var(--cs-accent), var(--cs-accent-2));
+  border-radius: 11px;
+  box-shadow: 0 10px 30px rgba(89, 216, 255, 0.16);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+#header + p a:hover,
+#header + p + p a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(89, 216, 255, 0.24);
+}
+
+/* Content sections */
+.section.level2 {
+  margin: 0 0 26px;
+  padding: clamp(24px, 4vw, 42px);
+  background: linear-gradient(145deg, rgba(15, 33, 55, 0.9), rgba(9, 23, 39, 0.86));
+  border: 1px solid var(--cs-line);
+  border-radius: 20px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.16);
+}
+
+.section.level3 {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--cs-line);
+}
+
+.section h1,
+.section h2,
+.section h3,
+.section h4,
+.section h5,
+.section h6 {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  color: var(--cs-text) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.section h2 {
+  margin-bottom: 22px !important;
+  font-size: clamp(1.75rem, 4vw, 2.65rem) !important;
+  font-weight: 780 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em;
+}
+
+.section h2::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 2px;
+  margin-top: 14px;
+  background: linear-gradient(90deg, var(--cs-accent), var(--cs-accent-2));
+}
+
+.section h3 {
+  margin-top: 32px !important;
+  margin-bottom: 14px !important;
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem) !important;
+  font-weight: 740 !important;
+  letter-spacing: -0.02em;
+}
+
+p,
+.line-block,
+li {
+  color: var(--cs-muted) !important;
+  font-size: 1rem;
+  line-height: 1.78 !important;
+}
+
+.line-block {
+  margin-bottom: 18px;
+  white-space: normal !important;
+}
+
+ol,
+ul {
+  padding-left: 1.55rem;
+}
+
+li {
+  margin-bottom: 7px;
+}
+
+strong,
+b {
+  color: var(--cs-text);
+}
+
+a {
+  color: var(--cs-accent) !important;
+  text-decoration-color: rgba(89, 216, 255, 0.4) !important;
+  text-underline-offset: 3px;
+}
+
+a:hover,
+a:focus {
+  color: #b7e8ff !important;
+}
+
+/* Code and console output */
+pre,
+pre:not([class]),
+pre.r {
+  margin: 20px 0 26px !important;
+  padding: 18px 20px !important;
+  overflow-x: auto;
+  color: #d8e5f2 !important;
+  background: #06111e !important;
+  border: 1px solid rgba(151, 184, 219, 0.18) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace !important;
+  font-size: 0.85rem !important;
+  line-height: 1.62 !important;
+  white-space: pre !important;
+}
+
+pre.r {
+  border-left: 3px solid var(--cs-accent) !important;
+}
+
+pre code,
+code {
+  color: inherit !important;
+  background: transparent !important;
+  font-family: inherit !important;
+}
+
+p code,
+li code {
+  padding: 0.15em 0.38em;
+  color: #d8e5f2 !important;
+  background: rgba(255, 255, 255, 0.065) !important;
+  border: 1px solid var(--cs-line);
+  border-radius: 6px;
+}
+
+/* Tables */
+table,
+.table {
+  width: 100% !important;
+  margin: 24px 0 30px !important;
+  overflow: hidden;
+  color: var(--cs-muted) !important;
+  background: rgba(5, 15, 27, 0.72) !important;
+  border: 1px solid var(--cs-line) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 14px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td,
+table th,
+table td {
+  padding: 10px 12px !important;
+  color: inherit !important;
+  background: transparent !important;
+  border-color: rgba(151, 184, 219, 0.13) !important;
+}
+
+table th,
+.table > thead > tr > th {
+  color: var(--cs-text) !important;
+  background: rgba(89, 216, 255, 0.075) !important;
+  font-weight: 750;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.025) !important;
+}
+
+/* Charts and generated figures */
+img {
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 26px auto 34px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(151, 184, 219, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+.figure,
+.figure-html,
+.html-widget {
+  margin: 26px 0 34px !important;
+}
+
+blockquote {
+  margin: 24px 0;
+  padding: 16px 20px;
+  color: var(--cs-muted);
+  background: rgba(89, 216, 255, 0.055);
+  border-left: 3px solid var(--cs-accent);
+  border-radius: 0 12px 12px 0;
+}
+
+hr {
+  border: 0 !important;
+  border-top: 1px solid var(--cs-line) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  body {
+    padding-top: 72px !important;
+  }
+
+  .navbar > .container {
+    width: min(calc(100% - 24px), 1120px) !important;
+  }
+
+  .navbar-brand {
+    padding-left: 0 !important;
+  }
+
+  .navbar-collapse {
+    margin-top: 1px;
+    padding: 8px 0 12px !important;
+    background: #081321 !important;
+    border-top: 1px solid var(--cs-line) !important;
+  }
+
+  .navbar-nav {
+    margin: 0 !important;
+  }
+
+  .navbar-nav > li > a {
+    margin: 2px 0;
+  }
+
+  .main-container {
+    width: min(calc(100% - 24px), 1120px) !important;
+  }
+
+  #header {
+    margin-top: 12px;
+    margin-bottom: 28px;
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  #header h4.author,
+  #header h4.date {
+    display: block;
+    margin: 4px 0 0 !important;
+  }
+
+  #header h4.date::before {
+    content: "";
+  }
+
+  #header + p,
+  #header + p + p {
+    display: block;
+    margin: 0 0 10px !important;
+  }
+
+  #header + p + p {
+    margin-bottom: 28px !important;
+  }
+
+  #header + p a,
+  #header + p + p a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section.level2 {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  pre,
+  pre:not([class]),
+  pre.r {
+    margin-right: -8px !important;
+    margin-left: -8px !important;
+    padding: 16px !important;
+    border-radius: 11px !important;
+    font-size: 0.76rem !important;
+  }
+
+  table,
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
