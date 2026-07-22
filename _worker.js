@@ -3,18 +3,19 @@ import originalWorker from './_worker-original.js';
 const credentialLayoutFix = String.raw`
 <style>
   .credential-card {
-    min-height: 610px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 26px !important;
-    align-items: stretch !important;
+    min-height: 340px !important;
+    display: grid !important;
+    grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr) !important;
+    gap: 24px !important;
+    align-items: center !important;
+    padding: 28px !important;
   }
 
   .credential-visual {
-    min-height: 340px !important;
+    min-height: 290px !important;
     display: grid !important;
     place-items: center !important;
-    padding: 20px !important;
+    padding: 10px !important;
     overflow: hidden !important;
     color: #172033 !important;
     background: #ffffff !important;
@@ -23,8 +24,8 @@ const credentialLayoutFix = String.raw`
   }
 
   .credential-visual > div[data-share-badge-id] {
-    width: 100% !important;
-    min-height: 300px !important;
+    width: auto !important;
+    min-height: 270px !important;
     display: grid !important;
     place-items: center !important;
   }
@@ -34,18 +35,21 @@ const credentialLayoutFix = String.raw`
   }
 
   .credential-copy {
-    flex: 1 !important;
-    justify-content: flex-start !important;
+    flex: initial !important;
+    justify-content: center !important;
   }
 
   @media (max-width: 680px) {
     .credential-card {
       min-height: 0 !important;
+      grid-template-columns: 1fr !important;
+      gap: 22px !important;
+      padding: 22px !important;
     }
 
     .credential-visual {
-      min-height: 320px !important;
-      padding: 14px !important;
+      min-height: 290px !important;
+      padding: 10px !important;
     }
   }
 </style>`;
@@ -68,8 +72,8 @@ export default {
       })
       .on('[data-share-badge-id]', {
         element(element) {
-          element.setAttribute('data-iframe-width', '300');
-          element.setAttribute('data-iframe-height', '300');
+          element.setAttribute('data-iframe-width', '210');
+          element.setAttribute('data-iframe-height', '270');
         },
       })
       .transform(response);
