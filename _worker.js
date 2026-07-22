@@ -24,14 +24,23 @@ const credentialLayoutFix = String.raw`
   }
 
   .credential-visual > div[data-share-badge-id] {
-    width: auto !important;
-    min-height: 270px !important;
-    display: grid !important;
-    place-items: center !important;
+    position: relative !important;
+    width: 220px !important;
+    height: 220px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
   }
 
-  .credential-visual iframe {
-    max-width: 100% !important;
+  .credential-visual > div[data-share-badge-id] iframe {
+    position: absolute !important;
+    top: -10px !important;
+    left: 50% !important;
+    width: 210px !important;
+    height: 270px !important;
+    max-width: none !important;
+    border: 0 !important;
+    transform: translateX(-50%) scale(1.6) !important;
+    transform-origin: top center !important;
   }
 
   .credential-copy {
@@ -48,7 +57,7 @@ const credentialLayoutFix = String.raw`
     }
 
     .credential-visual {
-      min-height: 290px !important;
+      min-height: 260px !important;
       padding: 10px !important;
     }
   }
