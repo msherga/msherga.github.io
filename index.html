@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, and homelab projects.">
+  <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, professional credentials, and homelab projects.">
   <meta name="author" content="Matt Sherga">
   <meta name="theme-color" content="#08111f">
   <meta property="og:title" content="Matt Sherga | Systems, Software & Infrastructure">
-  <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, and secure self-hosted infrastructure.">
+  <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, professional credentials, and secure self-hosted infrastructure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sherga.net/">
   <title>Matt Sherga | Systems, Software, & Infrastructure</title>
@@ -141,11 +141,11 @@
 
     .nav-links a {
       display: block;
-      padding: 10px 12px;
+      padding: 10px 10px;
       color: var(--muted);
       border-radius: 10px;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 650;
       transition: color 160ms ease, background 160ms ease;
     }
@@ -533,6 +533,108 @@
       font-weight: 700;
     }
 
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .credential-card {
+      position: relative;
+      min-height: 330px;
+      display: grid;
+      grid-template-columns: minmax(160px, 0.72fr) minmax(0, 1.28fr);
+      gap: 28px;
+      align-items: center;
+      padding: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(89, 216, 255, 0.1), transparent 15rem),
+        linear-gradient(145deg, rgba(15, 33, 55, 0.94), rgba(9, 23, 39, 0.9));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .credential-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(89, 216, 255, 0.38);
+    }
+
+    .credential-visual {
+      min-height: 270px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .credential-visual > div[data-share-badge-id] {
+      min-height: 270px;
+    }
+
+    .credential-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-self: stretch;
+      justify-content: center;
+    }
+
+    .credential-label {
+      margin-bottom: 13px;
+      color: var(--accent-2);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .credential-copy h3 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .credential-copy p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .credential-link {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 8px;
+      margin-top: 24px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 760;
+    }
+
+    .credential-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .microsoft-mark {
+      display: grid;
+      grid-template-columns: repeat(2, 52px);
+      grid-template-rows: repeat(2, 52px);
+      gap: 7px;
+      filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.28));
+    }
+
+    .microsoft-mark span:nth-child(1) { background: #f25022; }
+    .microsoft-mark span:nth-child(2) { background: #7fba00; }
+    .microsoft-mark span:nth-child(3) { background: #00a4ef; }
+    .microsoft-mark span:nth-child(4) { background: #ffb900; }
+
     .architecture {
       display: grid;
       grid-template-columns: repeat(5, minmax(120px, 1fr));
@@ -725,6 +827,13 @@
       transform: translateY(0);
     }
 
+    @media (max-width: 1080px) {
+      .nav-links a {
+        padding-inline: 8px;
+        font-size: 0.86rem;
+      }
+    }
+
     @media (max-width: 980px) {
       .nav-links {
         position: absolute;
@@ -765,6 +874,10 @@
       .section-heading,
       .about-grid,
       .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .credentials-grid {
         grid-template-columns: 1fr;
       }
 
@@ -809,6 +922,20 @@
       .architecture,
       .stats {
         grid-template-columns: 1fr;
+      }
+
+      .credential-card {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 22px;
+      }
+
+      .credential-visual {
+        min-height: 220px;
+      }
+
+      .credential-visual > div[data-share-badge-id] {
+        min-height: 270px;
       }
 
       .project-card,
@@ -880,6 +1007,7 @@
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#credentials">Credentials</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#homelab">Homelab</a></li>
         <li><a href="#case-studies">Case Studies</a></li>
@@ -957,6 +1085,44 @@
             <div class="stat"><strong>2.5G</strong><span>core Ethernet connectivity across the primary lab</span></div>
             <div class="stat"><strong>24/7</strong><span>automation, monitoring, media, storage, and remote access</span></div>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credentials">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Verified credentials.</h2>
+          <p>Selected professional certifications and digital credentials, linked directly to the issuing platforms for independent verification.</p>
+        </div>
+
+        <div class="credentials-grid">
+          <article class="credential-card reveal">
+            <div class="credential-visual" aria-label="Credly digital badge">
+              <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3c5aec3c-bb10-4db1-bdf7-73cbfa8f26f7" data-share-badge-host="https://www.credly.com"></div>
+              <noscript><a href="https://www.credly.com/badges/3c5aec3c-bb10-4db1-bdf7-73cbfa8f26f7/public_url" target="_blank" rel="noopener noreferrer">View this verified Credly badge</a></noscript>
+            </div>
+            <div class="credential-copy">
+              <span class="credential-label">Credly verified</span>
+              <h3>Professional digital badge</h3>
+              <p>The embedded badge is served directly by Credly and links to the official public verification record.</p>
+              <a class="credential-link" href="https://www.credly.com/badges/3c5aec3c-bb10-4db1-bdf7-73cbfa8f26f7/public_url" target="_blank" rel="noopener noreferrer">Open credential details <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="credential-card reveal">
+            <div class="credential-visual" aria-hidden="true">
+              <div class="microsoft-mark">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="credential-copy">
+              <span class="credential-label">Microsoft Learn verified</span>
+              <h3>Microsoft credential</h3>
+              <p>Open the official Microsoft Learn record to view the credential name, achievement details, and validation information.</p>
+              <a class="credential-link" href="https://learn.microsoft.com/api/credentials/share/en-us/MattSherga-8452/DBCBD19DF7C60978?sharingId=A47C14E99256A33A" target="_blank" rel="noopener noreferrer">View verified credential <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1105,6 +1271,7 @@
     </div>
   </footer>
 
+  <script async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
   <script>
     const menuButton = document.querySelector('.menu-button');
     const navLinks = document.querySelector('.nav-links');
