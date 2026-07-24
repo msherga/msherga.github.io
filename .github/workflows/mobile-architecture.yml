@@ -1,0 +1,133 @@
+name: Apply mobile architecture layout
+
+on:
+  push:
+    paths:
+      - .github/workflows/mobile-architecture.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update-mobile-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Move architecture details beneath selected card on mobile
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+
+          old_css = """      .hero-actions .button {
+        width: 100%;
+      }
+
+      .terminal-line {"""
+
+          new_css = """      .hero-actions .button {
+        width: 100%;
+      }
+
+      .architecture-detail {
+        margin-top: 12px;
+        margin-bottom: 3px;
+        animation: architecture-detail-in 180ms ease;
+      }
+
+      .arch-node.active {
+        transform: none;
+      }
+
+      .terminal-line {"""
+
+          if old_css not in text:
+              raise SystemExit("Could not find the mobile CSS insertion point")
+          text = text.replace(old_css, new_css, 1)
+
+          reduced_motion_marker = """    @media (prefers-reduced-motion: reduce) {"""
+          animation_css = """    @keyframes architecture-detail-in {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+"""
+          if reduced_motion_marker not in text:
+              raise SystemExit("Could not find the reduced-motion CSS marker")
+          text = text.replace(reduced_motion_marker, animation_css + reduced_motion_marker, 1)
+
+          old_js = """    const architectureNodes = document.querySelectorAll('.arch-node');
+    const architectureTitle = document.getElementById('arch-title');
+    const architectureDetail = document.getElementById('arch-detail');
+
+    architectureNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        architectureNodes.forEach((item) => item.classList.remove('active'));
+        node.classList.add('active');
+        architectureTitle.textContent = node.dataset.title;
+        architectureDetail.textContent = node.dataset.detail;
+      });
+    });"""
+
+          new_js = """    const architectureMap = document.querySelector('.architecture-map');
+    const architectureNodes = document.querySelectorAll('.arch-node');
+    const architecturePanel = document.querySelector('.architecture-shell');
+    const architectureDetailBox = document.querySelector('.architecture-detail');
+    const architectureTitle = document.getElementById('arch-title');
+    const architectureDetail = document.getElementById('arch-detail');
+    const mobileArchitectureQuery = window.matchMedia('(max-width: 680px)');
+
+    const positionArchitectureDetail = () => {
+      const activeNode = document.querySelector('.arch-node.active');
+
+      if (mobileArchitectureQuery.matches && activeNode) {
+        activeNode.insertAdjacentElement('afterend', architectureDetailBox);
+      } else {
+        architecturePanel.appendChild(architectureDetailBox);
+      }
+    };
+
+    architectureNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        architectureNodes.forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-expanded', 'false');
+        });
+        node.classList.add('active');
+        node.setAttribute('aria-expanded', 'true');
+        architectureTitle.textContent = node.dataset.title;
+        architectureDetail.textContent = node.dataset.detail;
+        positionArchitectureDetail();
+      });
+    });
+
+    architectureNodes.forEach((node) => {
+      node.setAttribute('aria-expanded', String(node.classList.contains('active')));
+    });
+
+    positionArchitectureDetail();
+    mobileArchitectureQuery.addEventListener('change', positionArchitectureDetail);"""
+
+          if old_js not in text:
+              raise SystemExit("Could not find the architecture JavaScript block")
+          text = text.replace(old_js, new_js, 1)
+
+          path.write_text(text, encoding="utf-8")
+
+      - name: Commit updated page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Improve mobile architecture interaction"
+          git push
