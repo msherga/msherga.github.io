@@ -899,6 +899,16 @@
         width: 100%;
       }
 
+      .architecture-detail {
+        margin-top: 12px;
+        margin-bottom: 3px;
+        animation: architecture-detail-in 180ms ease;
+      }
+
+      .arch-node.active {
+        transform: none;
+      }
+
       .terminal-line {
         grid-template-columns: 1fr;
         gap: 0;
@@ -911,6 +921,17 @@
 
       .footer-row {
         flex-direction: column;
+      }
+    }
+
+    @keyframes architecture-detail-in {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
       }
     }
 
@@ -1325,17 +1346,42 @@
     sections.forEach((section) => activeLinkObserver.observe(section));
 
     const architectureNodes = document.querySelectorAll('.arch-node');
+    const architecturePanel = document.querySelector('.architecture-shell');
+    const architectureDetailBox = document.querySelector('.architecture-detail');
     const architectureTitle = document.getElementById('arch-title');
     const architectureDetail = document.getElementById('arch-detail');
+    const mobileArchitectureQuery = window.matchMedia('(max-width: 680px)');
+
+    const positionArchitectureDetail = () => {
+      const activeNode = document.querySelector('.arch-node.active');
+
+      if (mobileArchitectureQuery.matches && activeNode) {
+        activeNode.insertAdjacentElement('afterend', architectureDetailBox);
+      } else {
+        architecturePanel.appendChild(architectureDetailBox);
+      }
+    };
 
     architectureNodes.forEach((node) => {
       node.addEventListener('click', () => {
-        architectureNodes.forEach((item) => item.classList.remove('active'));
+        architectureNodes.forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-expanded', 'false');
+        });
         node.classList.add('active');
+        node.setAttribute('aria-expanded', 'true');
         architectureTitle.textContent = node.dataset.title;
         architectureDetail.textContent = node.dataset.detail;
+        positionArchitectureDetail();
       });
     });
+
+    architectureNodes.forEach((node) => {
+      node.setAttribute('aria-expanded', String(node.classList.contains('active')));
+    });
+
+    positionArchitectureDetail();
+    mobileArchitectureQuery.addEventListener('change', positionArchitectureDetail);
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
