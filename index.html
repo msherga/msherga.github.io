@@ -5,19 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, professional credentials, and homelab projects.">
   <meta name="author" content="Matt Sherga">
-  <meta name="theme-color" content="#08111f">
+  <meta name="theme-color" content="#07101d">
   <meta property="og:title" content="Matt Sherga | Systems, Software & Infrastructure">
   <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, professional credentials, and secure self-hosted infrastructure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sherga.net/">
-  <title>Matt Sherga | Systems, Software, & Infrastructure</title>
+  <title>Matt Sherga | Systems, Software & Infrastructure</title>
 
   <style>
     :root {
       --bg: #07101d;
-      --bg-elevated: #0b1728;
-      --panel: rgba(14, 30, 50, 0.76);
-      --panel-strong: #10223a;
+      --panel: rgba(14, 30, 50, 0.78);
       --text: #f4f7fb;
       --muted: #9fb1c7;
       --line: rgba(151, 184, 219, 0.16);
@@ -34,7 +32,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 92px;
+      scroll-padding-top: 88px;
     }
 
     body {
@@ -72,6 +70,11 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    .shell {
+      width: min(calc(100% - 36px), var(--max-width));
+      margin: 0 auto;
+    }
+
     .skip-link {
       position: fixed;
       top: 10px;
@@ -99,9 +102,7 @@
     }
 
     .nav-wrap {
-      width: min(calc(100% - 36px), var(--max-width));
       min-height: 72px;
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -114,7 +115,7 @@
       gap: 11px;
       color: var(--text);
       text-decoration: none;
-      font-weight: 780;
+      font-weight: 800;
       letter-spacing: -0.02em;
       white-space: nowrap;
     }
@@ -133,7 +134,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -141,12 +142,12 @@
 
     .nav-links a {
       display: block;
-      padding: 10px 10px;
+      padding: 10px 9px;
       color: var(--muted);
       border-radius: 10px;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 650;
+      font-size: 0.85rem;
+      font-weight: 700;
       transition: color 160ms ease, background 160ms ease;
     }
 
@@ -160,11 +161,10 @@
 
     .menu-button {
       display: none;
-      align-items: center;
-      justify-content: center;
       width: 44px;
       height: 44px;
       padding: 0;
+      place-items: center;
       color: var(--text);
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--line);
@@ -177,19 +177,10 @@
       height: 22px;
     }
 
-    main {
-      display: block;
-    }
-
-    .shell {
-      width: min(calc(100% - 36px), var(--max-width));
-      margin: 0 auto;
-    }
-
     .hero {
       min-height: calc(100vh - 72px);
       display: grid;
-      grid-template-columns: minmax(0, 1.22fr) minmax(310px, 0.78fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(310px, 0.8fr);
       align-items: center;
       gap: clamp(42px, 8vw, 96px);
       padding: 82px 0 74px;
@@ -224,9 +215,22 @@
     h1 {
       max-width: 850px;
       margin-bottom: 24px;
-      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      font-size: clamp(3.2rem, 8vw, 7.2rem);
       line-height: 0.94;
       letter-spacing: -0.065em;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4.6vw, 4.15rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+    }
+
+    h3 {
+      margin-bottom: 11px;
+      font-size: 1.22rem;
+      line-height: 1.25;
     }
 
     .gradient-text {
@@ -243,10 +247,14 @@
       font-size: clamp(1.08rem, 1.7vw, 1.34rem);
     }
 
-    .hero-actions {
+    .hero-actions,
+    .contact-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 13px;
+    }
+
+    .hero-actions {
       margin-bottom: 42px;
     }
 
@@ -260,7 +268,7 @@
       border: 1px solid transparent;
       border-radius: 13px;
       text-decoration: none;
-      font-weight: 760;
+      font-weight: 780;
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
     }
 
@@ -275,7 +283,6 @@
     }
 
     .button-secondary {
-      color: var(--text);
       background: rgba(255, 255, 255, 0.045);
       border-color: var(--line);
     }
@@ -285,13 +292,15 @@
       border-color: rgba(89, 216, 255, 0.4);
     }
 
-    .hero-tags {
+    .hero-tags,
+    .card-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
     }
 
-    .tag {
+    .tag,
+    .card-meta span {
       padding: 7px 11px;
       color: var(--muted);
       background: rgba(255, 255, 255, 0.035);
@@ -309,21 +318,6 @@
       border-radius: 24px;
       box-shadow: var(--shadow);
       transform: rotate(1.2deg);
-    }
-
-    .terminal-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(120deg, transparent 30%, rgba(89, 216, 255, 0.07), transparent 64%);
-      transform: translateX(-100%);
-      animation: sheen 8s ease-in-out infinite;
-    }
-
-    @keyframes sheen {
-      0%, 68% { transform: translateX(-100%); }
-      86%, 100% { transform: translateX(100%); }
     }
 
     .terminal-head {
@@ -354,13 +348,13 @@
     .terminal-body {
       padding: 26px;
       font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-      font-size: clamp(0.78rem, 1.25vw, 0.94rem);
+      font-size: clamp(0.76rem, 1.2vw, 0.92rem);
       line-height: 1.85;
     }
 
     .terminal-line {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 18px;
       color: #abc0d5;
       border-bottom: 1px dashed rgba(151, 184, 219, 0.12);
@@ -385,66 +379,54 @@
     }
 
     .section-heading {
-      display: grid;
-      grid-template-columns: minmax(0, 0.68fr) minmax(300px, 1fr);
-      gap: 48px;
-      align-items: end;
-      margin-bottom: 42px;
+      max-width: 850px;
+      margin-bottom: 38px;
     }
 
-    .section-heading h2 {
+    .section-heading p:not(.eyebrow) {
+      max-width: 760px;
       margin-bottom: 0;
-      font-size: clamp(2.1rem, 4vw, 4rem);
-      line-height: 1.04;
-      letter-spacing: -0.045em;
+      color: #b7c7d8;
+      font-size: 1.06rem;
     }
 
-    .section-heading p {
-      max-width: 680px;
-      margin-bottom: 3px;
-      padding-left: 22px;
-      color: #b7c7d8;
-      border-left: 2px solid rgba(89, 216, 255, 0.46);
-      font-size: 1.08rem;
-      line-height: 1.65;
-      letter-spacing: -0.008em;
+    .panel,
+    .project-card,
+    .study-card,
+    .service-card,
+    .stack-group,
+    .metric-card,
+    .credential-card,
+    .contact-panel {
+      background: linear-gradient(145deg, rgba(16, 34, 58, 0.84), rgba(9, 24, 41, 0.72));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
     }
 
     .about-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-      gap: 24px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
     }
 
     .panel {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(24px, 4vw, 38px);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.18);
-    }
-
-    .panel p:last-child {
-      margin-bottom: 0;
+      padding: clamp(25px, 4vw, 42px);
     }
 
     .panel-lead {
-      color: #dce7f3;
-      font-size: clamp(1.15rem, 2vw, 1.42rem);
-      line-height: 1.6;
+      color: #dbe7f3;
+      font-size: 1.2rem;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 13px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
     .stat {
-      min-height: 128px;
-      padding: 20px;
+      padding: 18px;
       background: rgba(255, 255, 255, 0.035);
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -454,83 +436,13 @@
       display: block;
       margin-bottom: 5px;
       color: var(--accent);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-size: 2rem;
       line-height: 1;
-      letter-spacing: -0.04em;
     }
 
     .stat span {
       color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .project-card,
-    .study-card,
-    .service-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-height: 310px;
-      padding: 28px;
-      overflow: hidden;
-      background: linear-gradient(145deg, rgba(15, 33, 55, 0.92), rgba(9, 23, 39, 0.88));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-
-    .project-card:hover,
-    .study-card:hover,
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(89, 216, 255, 0.35);
-      background: linear-gradient(145deg, rgba(18, 39, 65, 0.96), rgba(10, 27, 45, 0.92));
-    }
-
-    .card-number {
-      margin-bottom: auto;
-      color: #6f8ba6;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-      font-size: 0.78rem;
-    }
-
-    .project-card h3,
-    .study-card h3,
-    .service-card h3 {
-      margin: 42px 0 10px;
-      font-size: 1.46rem;
-      line-height: 1.18;
-      letter-spacing: -0.025em;
-    }
-
-    .project-card p,
-    .study-card p,
-    .service-card p {
-      color: var(--muted);
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: auto;
-      padding-top: 24px;
-    }
-
-    .card-meta span {
-      padding: 6px 9px;
-      color: #adc0d5;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.88rem;
     }
 
     .credentials-grid {
@@ -540,20 +452,13 @@
     }
 
     .credential-card {
-      position: relative;
-      min-height: 330px;
+      min-height: 340px;
       display: grid;
-      grid-template-columns: minmax(160px, 0.72fr) minmax(0, 1.28fr);
-      gap: 28px;
+      grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
+      gap: 24px;
       align-items: center;
-      padding: 30px;
+      padding: 28px;
       overflow: hidden;
-      background:
-        radial-gradient(circle at 12% 16%, rgba(89, 216, 255, 0.1), transparent 15rem),
-        linear-gradient(145deg, rgba(15, 33, 55, 0.94), rgba(9, 23, 39, 0.9));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
       transition: transform 180ms ease, border-color 180ms ease;
     }
 
@@ -563,28 +468,24 @@
     }
 
     .credential-visual {
-      min-height: 270px;
+      min-height: 290px;
       display: grid;
       place-items: center;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--line);
+      padding: 10px;
+      overflow: hidden;
+      color: #172033;
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 18px;
-    }
-
-    .credential-visual > div[data-share-badge-id] {
-      min-height: 270px;
+      box-shadow: inset 0 0 0 1px rgba(7, 16, 29, 0.08);
     }
 
     .credential-copy {
-      display: flex;
       min-width: 0;
-      flex-direction: column;
-      align-self: stretch;
-      justify-content: center;
     }
 
     .credential-label {
+      display: block;
       margin-bottom: 13px;
       color: var(--accent-2);
       font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
@@ -596,9 +497,9 @@
 
     .credential-copy h3 {
       margin-bottom: 12px;
-      font-size: clamp(1.45rem, 2.4vw, 2.1rem);
-      line-height: 1.12;
-      letter-spacing: -0.035em;
+      font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+      line-height: 1.14;
+      letter-spacing: -0.03em;
     }
 
     .credential-copy p {
@@ -606,18 +507,21 @@
       color: var(--muted);
     }
 
-    .credential-link {
+    .credential-link,
+    .study-link,
+    .service-link {
       display: inline-flex;
       align-items: center;
-      align-self: flex-start;
       gap: 8px;
-      margin-top: 24px;
+      margin-top: 22px;
       color: var(--accent);
       text-decoration: none;
-      font-weight: 760;
+      font-weight: 800;
     }
 
-    .credential-link:hover {
+    .credential-link:hover,
+    .study-link:hover,
+    .service-link:hover {
       text-decoration: underline;
       text-underline-offset: 4px;
     }
@@ -635,76 +539,187 @@
     .microsoft-mark span:nth-child(3) { background: #00a4ef; }
     .microsoft-mark span:nth-child(4) { background: #ffb900; }
 
-    .architecture {
+    .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .metric-card {
+      padding: 24px;
+    }
+
+    .metric-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent-2);
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .metric-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card,
+    .study-card,
+    .service-card {
+      padding: 30px;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .project-card:hover,
+    .study-card:hover,
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(89, 216, 255, 0.38);
+    }
+
+    .project-card p,
+    .study-card p,
+    .service-card p,
+    .stack-group p {
+      color: var(--muted);
+    }
+
+    .card-number {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--accent-2);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .card-meta {
+      margin-top: 22px;
+    }
+
+    .architecture-shell {
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .architecture-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 15px;
       align-items: stretch;
     }
 
     .arch-node {
       position: relative;
-      min-height: 162px;
-      padding: 20px;
+      min-height: 180px;
+      padding: 22px;
+      color: var(--text);
+      text-align: left;
+      font: inherit;
       background: rgba(255, 255, 255, 0.035);
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 17px;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .arch-node:hover,
+    .arch-node:focus-visible,
+    .arch-node.active {
+      transform: translateY(-4px);
+      border-color: rgba(89, 216, 255, 0.5);
+      background: rgba(89, 216, 255, 0.065);
+      outline: none;
     }
 
     .arch-node:not(:last-child)::after {
       content: "→";
       position: absolute;
+      right: -13px;
       top: 50%;
-      right: -20px;
       z-index: 2;
-      width: 27px;
       color: var(--accent);
-      text-align: center;
+      font-weight: 900;
       transform: translateY(-50%);
     }
 
     .arch-node small {
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       color: var(--accent-2);
-      font-size: 0.7rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .arch-node strong {
       display: block;
-      margin-bottom: 8px;
-      font-size: 1.03rem;
+      margin-bottom: 9px;
+      font-size: 1.1rem;
     }
 
     .arch-node span {
       color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.45;
+      font-size: 0.86rem;
     }
 
-    .study-card {
-      min-height: 340px;
+    .architecture-detail {
+      margin-top: 18px;
+      padding: 22px 24px;
+      background: rgba(4, 14, 25, 0.6);
+      border: 1px solid var(--line);
+      border-radius: 16px;
     }
 
-    .study-link,
-    .service-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: auto;
-      padding-top: 24px;
+    .architecture-detail strong {
       color: var(--accent);
-      text-decoration: none;
-      font-weight: 760;
     }
 
-    .study-link:hover,
-    .service-link:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
+    .architecture-detail p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stack-group {
+      padding: 25px;
+    }
+
+    .stack-group small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--accent-2);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .stack-list span {
+      padding: 6px 9px;
+      color: #c6d5e5;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
     }
 
     .services-grid {
@@ -713,242 +728,175 @@
       gap: 16px;
     }
 
-    .service-card {
-      min-height: 252px;
-      padding: 23px;
-    }
-
-    .service-card h3 {
-      margin-top: 28px;
-    }
-
     .service-status {
       display: inline-flex;
       align-items: center;
-      align-self: flex-start;
       gap: 7px;
-      padding: 6px 9px;
-      color: #b9cadd;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.7rem;
+      margin-bottom: 18px;
+      color: var(--accent-2);
+      font-size: 0.74rem;
       font-weight: 800;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .service-status::before {
       content: "";
-      width: 7px;
-      height: 7px;
-      background: var(--accent-2);
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      box-shadow: 0 0 12px rgba(130, 240, 198, 0.55);
+      background: currentColor;
+      box-shadow: 0 0 14px currentColor;
     }
 
-    .service-status.private::before {
-      background: #ffd166;
-      box-shadow: 0 0 12px rgba(255, 209, 102, 0.38);
-    }
-
-    .service-card.private {
-      opacity: 0.78;
+    .service-status.private {
+      color: #d8b57a;
     }
 
     .contact-panel {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 40px;
+      display: flex;
       align-items: center;
-      padding: clamp(30px, 6vw, 64px);
-      background:
-        radial-gradient(circle at 85% 15%, rgba(130, 240, 198, 0.11), transparent 18rem),
-        linear-gradient(145deg, rgba(17, 38, 64, 0.98), rgba(9, 24, 41, 0.96));
-      border: 1px solid rgba(89, 216, 255, 0.25);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .contact-panel h2 {
-      margin-bottom: 16px;
-      font-size: clamp(2.2rem, 5vw, 4.5rem);
-      line-height: 1;
-      letter-spacing: -0.05em;
+      justify-content: space-between;
+      gap: 34px;
+      padding: clamp(28px, 5vw, 54px);
     }
 
     .contact-panel p {
-      max-width: 650px;
+      max-width: 700px;
       margin-bottom: 0;
       color: var(--muted);
-      font-size: 1.04rem;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .contact-actions .button {
-      width: 100%;
     }
 
     .site-footer {
-      padding: 34px 0 44px;
-      color: #7189a3;
-      font-size: 0.82rem;
+      padding: 28px 0 38px;
+      color: #7f95ac;
+      border-top: 1px solid var(--line);
     }
 
     .footer-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 20px;
     }
 
     .footer-row a {
-      color: #9fb1c7;
       text-decoration: none;
-    }
-
-    .footer-row a:hover {
-      color: var(--text);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 600ms ease, transform 600ms ease;
+      transform: translateY(18px);
+      transition: opacity 550ms ease, transform 550ms ease;
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
-    @media (max-width: 1080px) {
-      .nav-links a {
-        padding-inline: 8px;
-        font-size: 0.86rem;
+    @media (max-width: 1100px) {
+      .menu-button {
+        display: grid;
       }
-    }
 
-    @media (max-width: 980px) {
       .nav-links {
         position: absolute;
-        top: calc(100% + 1px);
+        top: 72px;
         right: 18px;
         left: 18px;
         display: none;
-        padding: 10px;
-        background: rgba(8, 19, 33, 0.98);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+        background: #0a1727;
         border: 1px solid var(--line);
         border-radius: 16px;
         box-shadow: var(--shadow);
       }
 
       .nav-links.open {
-        display: grid;
+        display: flex;
       }
 
       .nav-links a {
-        padding: 12px 14px;
+        padding: 12px;
       }
+    }
 
-      .menu-button {
-        display: inline-flex;
+    @media (max-width: 980px) {
+      .hero,
+      .about-grid {
+        grid-template-columns: 1fr;
       }
 
       .hero {
         min-height: auto;
-        grid-template-columns: 1fr;
-        padding-top: 72px;
+        padding-top: 60px;
       }
 
       .terminal-card {
-        max-width: 720px;
+        max-width: 680px;
         transform: none;
-      }
-
-      .section-heading,
-      .about-grid,
-      .contact-panel {
-        grid-template-columns: 1fr;
       }
 
       .credentials-grid {
         grid-template-columns: 1fr;
       }
 
+      .metrics-grid,
       .services-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .architecture {
+      .stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .architecture-map {
         grid-template-columns: 1fr 1fr;
       }
 
       .arch-node:not(:last-child)::after {
         display: none;
       }
+
+      .contact-panel {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 680px) {
-      .shell,
-      .nav-wrap {
+      .shell {
         width: min(calc(100% - 24px), var(--max-width));
-      }
-
-      h1 {
-        font-size: clamp(3rem, 17vw, 5.1rem);
       }
 
       .section {
         padding: 72px 0;
       }
 
-      .section-heading {
-        gap: 18px;
-        margin-bottom: 28px;
-      }
-
-      .section-heading p {
-        padding-left: 16px;
-      }
-
       .card-grid,
+      .stack-grid,
+      .metrics-grid,
       .services-grid,
-      .architecture,
+      .architecture-map,
       .stats {
         grid-template-columns: 1fr;
       }
 
       .credential-card {
+        min-height: 0;
         grid-template-columns: 1fr;
         gap: 22px;
         padding: 22px;
       }
 
       .credential-visual {
-        min-height: 220px;
-      }
-
-      .credential-visual > div[data-share-badge-id] {
-        min-height: 270px;
-      }
-
-      .project-card,
-      .study-card {
-        min-height: 290px;
+        min-height: 260px;
       }
 
       .hero-actions .button {
         width: 100%;
-      }
-
-      .terminal-body {
-        padding: 20px;
       }
 
       .terminal-line {
@@ -962,7 +910,6 @@
       }
 
       .footer-row {
-        align-items: flex-start;
         flex-direction: column;
       }
     }
@@ -993,7 +940,7 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
-    <nav class="nav-wrap" aria-label="Primary navigation">
+    <nav class="shell nav-wrap" aria-label="Primary navigation">
       <a class="brand" href="#home" aria-label="Matt Sherga home">
         <span class="brand-mark" aria-hidden="true">MS</span>
         <span>Matt Sherga</span>
@@ -1010,6 +957,7 @@
         <li><a href="#credentials">Credentials</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#homelab">Homelab</a></li>
+        <li><a href="#stack">Stack</a></li>
         <li><a href="#case-studies">Case Studies</a></li>
         <li><a href="#services">Lab Access</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1022,12 +970,10 @@
       <div>
         <p class="eyebrow">Systems · Software · Infrastructure</p>
         <h1>Building systems that <span class="gradient-text">work together.</span></h1>
-        <p class="hero-copy">
-          I design, automate, and troubleshoot environments spanning software, virtualization, networking, storage, data, and home automation—then make the complicated parts manageable.
-        </p>
+        <p class="hero-copy">I design, automate, and troubleshoot environments spanning software, virtualization, networking, storage, data, and home automation—then make the complicated parts manageable.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#projects">My personal projects</a>
-          <a class="button button-secondary" href="mailto:jobs@sherga.net">Email me!</a>
+          <a class="button button-primary" href="#projects">Explore my work</a>
+          <a class="button button-secondary" href="mailto:jobs@sherga.net">Email me</a>
         </div>
         <div class="hero-tags" aria-label="Core technologies">
           <span class="tag">Proxmox</span>
@@ -1048,7 +994,8 @@
         <div class="terminal-body">
           <div class="terminal-line"><span class="terminal-key">platform</span><span class="terminal-value">Proxmox VE</span></div>
           <div class="terminal-line"><span class="terminal-key">network</span><span class="terminal-value">2.5 GbE + VLANs</span></div>
-          <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">48 TB mirrored ZFS</span></div>
+          <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">~48 TB total</span></div>
+          <div class="terminal-line"><span class="terminal-key">protected</span><span class="terminal-value">~16 TB mirrored ZFS</span></div>
           <div class="terminal-line"><span class="terminal-key">edge</span><span class="terminal-value">pfSense + Cloudflare</span></div>
           <div class="terminal-line"><span class="terminal-key">automation</span><span class="terminal-value">Home Assistant</span></div>
           <div class="terminal-line"><span class="terminal-key">services</span><span class="terminal-value">Docker + LXC</span></div>
@@ -1061,29 +1008,21 @@
       <div class="shell">
         <div class="section-heading reveal">
           <h2>Technical breadth without losing the details.</h2>
-          <p>
-            My work sits at the intersection of infrastructure, software, data, and operations. I enjoy understanding how every layer fits together—from physical hardware and network paths to applications, automations, and the people using them.
-          </p>
+          <p>My work sits at the intersection of infrastructure, software, data, and operations. I enjoy understanding how every layer fits together—from physical hardware and network paths to applications, automations, and the people using them.</p>
         </div>
 
         <div class="about-grid">
           <article class="panel reveal">
-            <p class="panel-lead">
-              I bring enterprise infrastructure experience, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.
-            </p>
-            <p>
-              That combination has taught me to approach technical problems from both directions: zoom out far enough to design the right system, then zoom in far enough to find the one configuration, dependency, or assumption causing trouble.
-            </p>
-            <p>
-              This site brings together my professional interests, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.
-            </p>
+            <p class="panel-lead">I bring enterprise infrastructure experience, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.</p>
+            <p>That combination has taught me to approach technical problems from both directions: zoom out far enough to design the right system, then zoom in far enough to find the one configuration, dependency, or assumption causing trouble.</p>
+            <p>This site brings together my professional interests, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.</p>
           </article>
 
           <aside class="panel stats reveal" aria-label="Homelab statistics">
             <div class="stat"><strong>10+</strong><span>self-hosted applications and infrastructure services</span></div>
             <div class="stat"><strong>3</strong><span>segmented network zones for trusted, IoT, and guest devices</span></div>
             <div class="stat"><strong>2.5G</strong><span>core Ethernet connectivity across the primary lab</span></div>
-            <div class="stat"><strong>24/7</strong><span>automation, monitoring, media, storage, and remote access</span></div>
+            <div class="stat"><strong>24/7</strong><span>automation, monitoring, storage, and remote access</span></div>
           </aside>
         </div>
       </div>
@@ -1112,9 +1051,7 @@
 
           <article class="credential-card reveal">
             <div class="credential-visual" aria-hidden="true">
-              <div class="microsoft-mark">
-                <span></span><span></span><span></span><span></span>
-              </div>
+              <div class="microsoft-mark"><span></span><span></span><span></span><span></span></div>
             </div>
             <div class="credential-copy">
               <span class="credential-label">Microsoft Learn verified</span>
@@ -1131,7 +1068,7 @@
       <div class="shell">
         <div class="section-heading reveal">
           <h2>Selected projects.</h2>
-          <p>Practical systems built to solve real problems.</p>
+          <p>Practical systems built to solve real problems, with operational tradeoffs and failure modes treated as part of the design.</p>
         </div>
 
         <div class="card-grid">
@@ -1169,16 +1106,82 @@
     <section class="section" id="homelab">
       <div class="shell">
         <div class="section-heading reveal">
-          <h2>A homelab designed like a small production environment.</h2>
-          <p>Layered networking, deliberate trust boundaries, redundant storage, service isolation, remote access, monitoring, and recovery all work as one system.</p>
+          <p class="eyebrow">Inside my homelab</p>
+          <h2>A small production environment, built at home.</h2>
+          <p>The lab is designed around explicit trust boundaries, isolated workloads, resilient storage, secure remote access, observability, and recoverability—not just a pile of applications.</p>
         </div>
 
-        <div class="panel architecture reveal" aria-label="High-level homelab architecture">
-          <div class="arch-node"><small>Internet edge</small><strong>Cloudflare</strong><span>DNS, proxying, TLS, email routing, and protected external access.</span></div>
-          <div class="arch-node"><small>Gateway</small><strong>pfSense</strong><span>Firewalling, routing, VLANs, VPNs, DNS, certificates, and reverse proxy.</span></div>
-          <div class="arch-node"><small>Core</small><strong>2.5 GbE network</strong><span>Managed switching, PoE edge devices, access points, and segmented clients.</span></div>
-          <div class="arch-node"><small>Compute</small><strong>Proxmox + HAOS</strong><span>Containerized services, virtual machines, automation, cameras, and GPU workloads.</span></div>
-          <div class="arch-node"><small>Data</small><strong>ZFS + backups</strong><span>Mirrored bulk storage, SSD workloads, snapshots, and Proxmox Backup Server.</span></div>
+        <div class="metrics-grid reveal">
+          <div class="metric-card"><strong>3</strong><span>network security zones</span></div>
+          <div class="metric-card"><strong>2.5 GbE</strong><span>primary network backbone</span></div>
+          <div class="metric-card"><strong>~48 TB</strong><span>total home storage, including ~16 TB mirrored ZFS</span></div>
+          <div class="metric-card"><strong>GPU</strong><span>accelerated media and AI workloads</span></div>
+        </div>
+
+        <div class="panel architecture-shell reveal">
+          <div class="architecture-map" aria-label="Interactive high-level homelab architecture">
+            <button class="arch-node active" type="button" data-title="Cloudflare edge" data-detail="Public DNS, TLS, proxying, email routing, and protected access terminate at the edge before traffic reaches the lab.">
+              <small>Internet edge</small><strong>Cloudflare</strong><span>DNS, proxying, TLS, and protected external access.</span>
+            </button>
+            <button class="arch-node" type="button" data-title="pfSense gateway" data-detail="pfSense is the network authority for routing, firewall policy, VLANs, DNS, certificates, VPN access, and reverse-proxy decisions.">
+              <small>Gateway</small><strong>pfSense</strong><span>Firewalling, routing, VLANs, VPNs, DNS, and HAProxy.</span>
+            </button>
+            <button class="arch-node" type="button" data-title="Segmented network core" data-detail="A 2.5 GbE core connects trusted systems while managed switching and firewall rules separate LAN, IoT, and guest traffic.">
+              <small>Core</small><strong>2.5 GbE + VLANs</strong><span>Managed switching, PoE devices, access points, and isolation.</span>
+            </button>
+            <button class="arch-node" type="button" data-title="Compute and automation" data-detail="Proxmox hosts isolated LXC and VM workloads, while a dedicated Home Assistant machine handles automation, cameras, radios, and local intelligence.">
+              <small>Compute</small><strong>Proxmox + HAOS</strong><span>Containers, virtual machines, automation, cameras, and GPU workloads.</span>
+            </button>
+            <button class="arch-node" type="button" data-title="Storage and recovery" data-detail="About 16 TB of mirrored ZFS provides resilient bulk storage, SSDs handle latency-sensitive work, and Proxmox Backup Server protects virtualized workloads.">
+              <small>Data</small><strong>ZFS + backups</strong><span>~16 TB mirrored ZFS, SSD workloads, snapshots, and PBS.</span>
+            </button>
+          </div>
+          <div class="architecture-detail" aria-live="polite">
+            <strong id="arch-title">Cloudflare edge</strong>
+            <p id="arch-detail">Public DNS, TLS, proxying, email routing, and protected access terminate at the edge before traffic reaches the lab.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <h2>Technology stack.</h2>
+          <p>The tools matter less than how they are combined, but this is the working set behind the projects shown here.</p>
+        </div>
+
+        <div class="stack-grid">
+          <article class="stack-group reveal">
+            <small>Infrastructure</small><h3>Compute and storage</h3>
+            <p>Virtualization, workload isolation, persistent storage, backups, and hardware acceleration.</p>
+            <div class="stack-list"><span>Proxmox VE</span><span>LXC</span><span>Docker</span><span>ZFS</span><span>PBS</span><span>NVIDIA</span></div>
+          </article>
+          <article class="stack-group reveal">
+            <small>Networking</small><h3>Routing and secure access</h3>
+            <p>Segmentation, internal service discovery, encrypted access, certificate automation, and edge publishing.</p>
+            <div class="stack-list"><span>pfSense</span><span>HAProxy</span><span>Cloudflare</span><span>WireGuard</span><span>Tailscale</span><span>Unbound</span></div>
+          </article>
+          <article class="stack-group reveal">
+            <small>Automation</small><h3>Home and operations</h3>
+            <p>Event-driven automation, cameras, messaging, local protocols, monitoring, and service orchestration.</p>
+            <div class="stack-list"><span>Home Assistant</span><span>Frigate</span><span>MQTT</span><span>Zigbee</span><span>Z-Wave</span><span>Matter</span></div>
+          </article>
+          <article class="stack-group reveal">
+            <small>Engineering</small><h3>Scripting and integration</h3>
+            <p>Repeatable administration, data handling, APIs, deployment workflows, and glue code.</p>
+            <div class="stack-list"><span>PowerShell</span><span>Python</span><span>Bash</span><span>JavaScript</span><span>GitHub Actions</span><span>REST APIs</span></div>
+          </article>
+          <article class="stack-group reveal">
+            <small>Data</small><h3>Analysis and applications</h3>
+            <p>Exploration, statistical modeling, visualization, reporting, and interactive analytical applications.</p>
+            <div class="stack-list"><span>R</span><span>ggplot2</span><span>Shiny</span><span>SQL</span><span>Regression</span><span>EDA</span></div>
+          </article>
+          <article class="stack-group reveal">
+            <small>Operations</small><h3>Security and reliability</h3>
+            <p>Least exposure, segmented trust, monitoring, backup validation, and troubleshooting across layers.</p>
+            <div class="stack-list"><span>TLS</span><span>VLANs</span><span>Snapshots</span><span>Syslog</span><span>Health checks</span><span>Recovery</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -1187,7 +1190,7 @@
       <div class="shell">
         <div class="section-heading reveal">
           <h2>Graduate data case studies.</h2>
-          <p>Original work from my Master's program, preserved here while the presentation is gradually modernized.</p>
+          <p>Original work from my Master's program, covering exploratory analysis, statistical modeling, and interactive applications.</p>
         </div>
 
         <div class="card-grid">
@@ -1196,7 +1199,7 @@
             <h3>Beer and Breweries</h3>
             <p>Exploratory data analysis, statistical comparisons, geographic trends, data wrangling, visualization, and an interactive R Shiny application built from U.S. beer and brewery datasets.</p>
             <div class="card-meta"><span>R</span><span>ggplot2</span><span>Statistics</span><span>Shiny</span></div>
-            <a class="study-link" href="B-B-Case-Study.html">Read the original study <span aria-hidden="true">→</span></a>
+            <a class="study-link" href="B-B-Case-Study.html">Read the study <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="study-card reveal">
@@ -1204,7 +1207,7 @@
             <h3>Employee Attrition and Income Modeling</h3>
             <p>Employee-data analysis focused on attrition drivers, job-role trends, Naïve Bayes classification, and regression modeling for monthly income.</p>
             <div class="card-meta"><span>R</span><span>Naïve Bayes</span><span>Regression</span><span>EDA</span></div>
-            <a class="study-link" href="casestudy2-htmlmkdwn.html">Read the original study <span aria-hidden="true">→</span></a>
+            <a class="study-link" href="casestudy2-htmlmkdwn.html">Read the study <span aria-hidden="true">→</span></a>
           </article>
         </div>
       </div>
@@ -1214,7 +1217,7 @@
       <div class="shell">
         <div class="section-heading reveal">
           <h2>Lab access.</h2>
-          <p>A launch point for selected self-hosted services. Each application keeps its own authentication and access controls; sensitive administration remains private.</p>
+          <p>A launch point for selected self-hosted services. Each application retains its own authentication and access controls; administrative interfaces remain private.</p>
         </div>
 
         <div class="services-grid">
@@ -1232,15 +1235,15 @@
             <a class="service-link" href="https://cloud.sherga.net" target="_blank" rel="noopener noreferrer">Open service <span aria-hidden="true">↗</span></a>
           </article>
 
-          <article class="service-card private reveal">
+          <article class="service-card reveal">
             <span class="service-status private">Private</span>
             <h3>Proxmox</h3>
             <p>Virtualization management is intentionally restricted to trusted local and VPN connections.</p>
           </article>
 
-          <article class="service-card private reveal">
+          <article class="service-card reveal">
             <span class="service-status private">Private</span>
-            <h3>Network Admin</h3>
+            <h3>Network administration</h3>
             <p>Firewall, switching, storage, and infrastructure management remain off the public edge.</p>
           </article>
         </div>
@@ -1320,6 +1323,20 @@
     }, { rootMargin: '-32% 0px -58% 0px' });
 
     sections.forEach((section) => activeLinkObserver.observe(section));
+
+    const architectureNodes = document.querySelectorAll('.arch-node');
+    const architectureTitle = document.getElementById('arch-title');
+    const architectureDetail = document.getElementById('arch-detail');
+
+    architectureNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        architectureNodes.forEach((item) => item.classList.remove('active'));
+        node.classList.add('active');
+        architectureTitle.textContent = node.dataset.title;
+        architectureDetail.textContent = node.dataset.detail;
+      });
+    });
+
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
