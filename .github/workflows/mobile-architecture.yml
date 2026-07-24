@@ -15,115 +15,40 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Move architecture details beneath selected card on mobile
-        shell: python
+        shell: bash
         run: |
+          python - <<'PY'
           from pathlib import Path
 
           path = Path("index.html")
           text = path.read_text(encoding="utf-8")
 
-          old_css = """      .hero-actions .button {
-        width: 100%;
-      }
-
-      .terminal-line {"""
-
-          new_css = """      .hero-actions .button {
-        width: 100%;
-      }
-
-      .architecture-detail {
-        margin-top: 12px;
-        margin-bottom: 3px;
-        animation: architecture-detail-in 180ms ease;
-      }
-
-      .arch-node.active {
-        transform: none;
-      }
-
-      .terminal-line {"""
+          old_css = "      .hero-actions .button {\n        width: 100%;\n      }\n\n      .terminal-line {"
+          new_css = "      .hero-actions .button {\n        width: 100%;\n      }\n\n      .architecture-detail {\n        margin-top: 12px;\n        margin-bottom: 3px;\n        animation: architecture-detail-in 180ms ease;\n      }\n\n      .arch-node.active {\n        transform: none;\n      }\n\n      .terminal-line {"
 
           if old_css not in text:
               raise SystemExit("Could not find the mobile CSS insertion point")
           text = text.replace(old_css, new_css, 1)
 
-          reduced_motion_marker = """    @media (prefers-reduced-motion: reduce) {"""
-          animation_css = """    @keyframes architecture-detail-in {
-      from {
-        opacity: 0;
-        transform: translateY(-6px);
-      }
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
+          reduced_motion_marker = "    @media (prefers-reduced-motion: reduce) {"
+          animation_css = "    @keyframes architecture-detail-in {\n      from {\n        opacity: 0;\n        transform: translateY(-6px);\n      }\n      to {\n        opacity: 1;\n        transform: none;\n      }\n    }\n\n"
 
-"""
           if reduced_motion_marker not in text:
               raise SystemExit("Could not find the reduced-motion CSS marker")
           text = text.replace(reduced_motion_marker, animation_css + reduced_motion_marker, 1)
 
-          old_js = """    const architectureNodes = document.querySelectorAll('.arch-node');
-    const architectureTitle = document.getElementById('arch-title');
-    const architectureDetail = document.getElementById('arch-detail');
-
-    architectureNodes.forEach((node) => {
-      node.addEventListener('click', () => {
-        architectureNodes.forEach((item) => item.classList.remove('active'));
-        node.classList.add('active');
-        architectureTitle.textContent = node.dataset.title;
-        architectureDetail.textContent = node.dataset.detail;
-      });
-    });"""
-
-          new_js = """    const architectureMap = document.querySelector('.architecture-map');
-    const architectureNodes = document.querySelectorAll('.arch-node');
-    const architecturePanel = document.querySelector('.architecture-shell');
-    const architectureDetailBox = document.querySelector('.architecture-detail');
-    const architectureTitle = document.getElementById('arch-title');
-    const architectureDetail = document.getElementById('arch-detail');
-    const mobileArchitectureQuery = window.matchMedia('(max-width: 680px)');
-
-    const positionArchitectureDetail = () => {
-      const activeNode = document.querySelector('.arch-node.active');
-
-      if (mobileArchitectureQuery.matches && activeNode) {
-        activeNode.insertAdjacentElement('afterend', architectureDetailBox);
-      } else {
-        architecturePanel.appendChild(architectureDetailBox);
-      }
-    };
-
-    architectureNodes.forEach((node) => {
-      node.addEventListener('click', () => {
-        architectureNodes.forEach((item) => {
-          item.classList.remove('active');
-          item.setAttribute('aria-expanded', 'false');
-        });
-        node.classList.add('active');
-        node.setAttribute('aria-expanded', 'true');
-        architectureTitle.textContent = node.dataset.title;
-        architectureDetail.textContent = node.dataset.detail;
-        positionArchitectureDetail();
-      });
-    });
-
-    architectureNodes.forEach((node) => {
-      node.setAttribute('aria-expanded', String(node.classList.contains('active')));
-    });
-
-    positionArchitectureDetail();
-    mobileArchitectureQuery.addEventListener('change', positionArchitectureDetail);"""
+          old_js = "    const architectureNodes = document.querySelectorAll('.arch-node');\n    const architectureTitle = document.getElementById('arch-title');\n    const architectureDetail = document.getElementById('arch-detail');\n\n    architectureNodes.forEach((node) => {\n      node.addEventListener('click', () => {\n        architectureNodes.forEach((item) => item.classList.remove('active'));\n        node.classList.add('active');\n        architectureTitle.textContent = node.dataset.title;\n        architectureDetail.textContent = node.dataset.detail;\n      });\n    });"
+          new_js = "    const architectureNodes = document.querySelectorAll('.arch-node');\n    const architecturePanel = document.querySelector('.architecture-shell');\n    const architectureDetailBox = document.querySelector('.architecture-detail');\n    const architectureTitle = document.getElementById('arch-title');\n    const architectureDetail = document.getElementById('arch-detail');\n    const mobileArchitectureQuery = window.matchMedia('(max-width: 680px)');\n\n    const positionArchitectureDetail = () => {\n      const activeNode = document.querySelector('.arch-node.active');\n\n      if (mobileArchitectureQuery.matches && activeNode) {\n        activeNode.insertAdjacentElement('afterend', architectureDetailBox);\n      } else {\n        architecturePanel.appendChild(architectureDetailBox);\n      }\n    };\n\n    architectureNodes.forEach((node) => {\n      node.addEventListener('click', () => {\n        architectureNodes.forEach((item) => {\n          item.classList.remove('active');\n          item.setAttribute('aria-expanded', 'false');\n        });\n        node.classList.add('active');\n        node.setAttribute('aria-expanded', 'true');\n        architectureTitle.textContent = node.dataset.title;\n        architectureDetail.textContent = node.dataset.detail;\n        positionArchitectureDetail();\n      });\n    });\n\n    architectureNodes.forEach((node) => {\n      node.setAttribute('aria-expanded', String(node.classList.contains('active')));\n    });\n\n    positionArchitectureDetail();\n    mobileArchitectureQuery.addEventListener('change', positionArchitectureDetail);"
 
           if old_js not in text:
               raise SystemExit("Could not find the architecture JavaScript block")
           text = text.replace(old_js, new_js, 1)
 
           path.write_text(text, encoding="utf-8")
+          PY
 
       - name: Commit updated page
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
