@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, professional credentials, and homelab projects.">
+  <meta name="description" content="Matt Sherga's portfolio: technical product ownership, Agile delivery, systems engineering, software, infrastructure, automation, data, and homelab projects.">
   <meta name="author" content="Matt Sherga">
   <meta name="theme-color" content="#07101d">
-  <meta property="og:title" content="Matt Sherga | Systems, Software & Infrastructure">
-  <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, professional credentials, and secure self-hosted infrastructure.">
+  <meta property="og:title" content="Matt Sherga | Technical Product Owner &amp; Systems Engineer">
+  <meta property="og:description" content="Technical product ownership, Agile delivery, systems engineering, automation, data, and secure self-hosted infrastructure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sherga.net/">
-  <title>Matt Sherga | Systems, Software & Infrastructure</title>
+  <title>Matt Sherga | Technical Product Owner &amp; Systems Engineer</title>
 
   <style>
     :root {
@@ -391,6 +391,7 @@
     }
 
     .panel,
+    .product-card,
     .project-card,
     .study-card,
     .service-card,
@@ -443,6 +444,84 @@
     .stat span {
       color: var(--muted);
       font-size: 0.88rem;
+    }
+
+    .product-cycle {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .cycle-step {
+      position: relative;
+      min-height: 126px;
+      padding: 21px 18px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .cycle-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      right: -11px;
+      z-index: 2;
+      color: var(--accent);
+      font-weight: 900;
+      transform: translateY(-50%);
+    }
+
+    .cycle-step small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent-2);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cycle-step strong {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      padding: 30px;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(130, 240, 198, 0.4);
+    }
+
+    .product-card p {
+      color: var(--muted);
+    }
+
+    .product-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .credential-pill {
+      padding: 9px 12px;
+      color: #d9e7f4;
+      background: rgba(130, 240, 198, 0.055);
+      border: 1px solid rgba(130, 240, 198, 0.22);
+      border-radius: 11px;
+      font-size: 0.82rem;
+      font-weight: 750;
     }
 
     .credentials-grid {
@@ -856,7 +935,12 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .arch-node:not(:last-child)::after {
+      .product-cycle {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .arch-node:not(:last-child)::after,
+      .cycle-step:not(:last-child)::after {
         display: none;
       }
 
@@ -876,6 +960,8 @@
       }
 
       .card-grid,
+      .product-grid,
+      .product-cycle,
       .stack-grid,
       .metrics-grid,
       .services-grid,
@@ -975,6 +1061,7 @@
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#product">Product</a></li>
         <li><a href="#credentials">Credentials</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#homelab">Homelab</a></li>
@@ -989,38 +1076,38 @@
   <main id="main-content">
     <section class="shell hero" id="home">
       <div>
-        <p class="eyebrow">Systems · Software · Infrastructure</p>
-        <h1>Building systems that <span class="gradient-text">work together.</span></h1>
-        <p class="hero-copy">I design, automate, and troubleshoot environments spanning software, virtualization, networking, storage, data, and home automation—then make the complicated parts manageable.</p>
+        <p class="eyebrow">Technical Product Owner · Systems Engineer</p>
+        <h1>Turning complex systems into <span class="gradient-text">clear, shippable work.</span></h1>
+        <p class="hero-copy">I connect product direction with technical execution—translating business needs into roadmaps, prioritized backlogs, clear requirements, and release-ready solutions across software, infrastructure, automation, and data.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#projects">Explore my work</a>
+          <a class="button button-primary" href="#product">Explore product delivery</a>
+          <a class="button button-secondary" href="#projects">View technical work</a>
           <a class="button button-secondary" href="mailto:jobs@sherga.net">Email me</a>
         </div>
-        <div class="hero-tags" aria-label="Core technologies">
-          <span class="tag">Proxmox</span>
-          <span class="tag">pfSense</span>
-          <span class="tag">Cloudflare</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Home Assistant</span>
-          <span class="tag">PowerShell</span>
-          <span class="tag">Python</span>
+        <div class="hero-tags" aria-label="Core product and technical skills">
+          <span class="tag">Product Ownership</span>
+          <span class="tag">Roadmaps &amp; Backlogs</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">Technical Requirements</span>
+          <span class="tag">Release Readiness</span>
+          <span class="tag">Systems Engineering</span>
         </div>
       </div>
 
-      <aside class="terminal-card" aria-label="Homelab overview">
+      <aside class="terminal-card" aria-label="Product and technical delivery overview">
         <div class="terminal-head">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="terminal-title">sherga.net / system overview</span>
+          <span class="terminal-title">profile / delivery overview</span>
         </div>
         <div class="terminal-body">
-          <div class="terminal-line"><span class="terminal-key">platform</span><span class="terminal-value">Proxmox VE</span></div>
-          <div class="terminal-line"><span class="terminal-key">network</span><span class="terminal-value">2.5 GbE + VLANs</span></div>
-          <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">~48 TB total</span></div>
-          <div class="terminal-line"><span class="terminal-key">protected</span><span class="terminal-value">~16 TB mirrored ZFS</span></div>
-          <div class="terminal-line"><span class="terminal-key">edge</span><span class="terminal-value">pfSense + Cloudflare</span></div>
-          <div class="terminal-line"><span class="terminal-key">automation</span><span class="terminal-value">Home Assistant</span></div>
-          <div class="terminal-line"><span class="terminal-key">services</span><span class="terminal-value">Docker + LXC</span></div>
-          <div class="terminal-line"><span class="terminal-key">status</span><span class="terminal-value">Always evolving</span></div>
+          <div class="terminal-line"><span class="terminal-key">product</span><span class="terminal-value">Roadmap → Release</span></div>
+          <div class="terminal-line"><span class="terminal-key">planning</span><span class="terminal-value">Backlogs + Priorities</span></div>
+          <div class="terminal-line"><span class="terminal-key">definition</span><span class="terminal-value">Stories + Acceptance</span></div>
+          <div class="terminal-line"><span class="terminal-key">delivery</span><span class="terminal-value">Cross-functional</span></div>
+          <div class="terminal-line"><span class="terminal-key">methods</span><span class="terminal-value">Agile + Scrum + SAFe</span></div>
+          <div class="terminal-line"><span class="terminal-key">platforms</span><span class="terminal-value">Software + Cloud</span></div>
+          <div class="terminal-line"><span class="terminal-key">technical</span><span class="terminal-value">Systems + Automation</span></div>
+          <div class="terminal-line"><span class="terminal-key">focus</span><span class="terminal-value">Useful outcomes</span></div>
         </div>
       </aside>
     </section>
@@ -1028,23 +1115,78 @@
     <section class="section" id="about">
       <div class="shell">
         <div class="section-heading reveal">
-          <h2>Technical breadth without losing the details.</h2>
-          <p>My work sits at the intersection of infrastructure, software, data, and operations. I enjoy understanding how every layer fits together—from physical hardware and network paths to applications, automations, and the people using them.</p>
+          <h2>Product judgment backed by technical depth.</h2>
+          <p>My work sits at the intersection of product, engineering, infrastructure, data, and operations. I understand the systems deeply enough to ask better questions, clarify tradeoffs, and keep delivery connected to the people and outcomes it serves.</p>
         </div>
 
         <div class="about-grid">
           <article class="panel reveal">
-            <p class="panel-lead">I bring enterprise infrastructure experience, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.</p>
-            <p>That combination has taught me to approach technical problems from both directions: zoom out far enough to design the right system, then zoom in far enough to find the one configuration, dependency, or assumption causing trouble.</p>
-            <p>This site brings together my professional interests, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.</p>
+            <p class="panel-lead">I bring formal Product Owner experience, enterprise systems delivery, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.</p>
+            <p>That combination helps me work in both directions: zoom out to align stakeholders, priorities, and outcomes, then zoom in to clarify requirements, dependencies, release risks, and the technical detail blocking progress.</p>
+            <p>This site brings together my product-delivery experience, technical projects, professional credentials, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.</p>
           </article>
 
-          <aside class="panel stats reveal" aria-label="Homelab statistics">
-            <div class="stat"><strong>10+</strong><span>self-hosted applications and infrastructure services</span></div>
-            <div class="stat"><strong>3</strong><span>segmented network zones for trusted, IoT, and guest devices</span></div>
-            <div class="stat"><strong>2.5G</strong><span>core Ethernet connectivity across the primary lab</span></div>
-            <div class="stat"><strong>24/7</strong><span>automation, monitoring, storage, and remote access</span></div>
+          <aside class="panel stats reveal" aria-label="Professional experience highlights">
+            <div class="stat"><strong>8+</strong><span>years delivering technology products and platforms at Dell</span></div>
+            <div class="stat"><strong>5</strong><span>years translating needs into enhancements for the XACT platform</span></div>
+            <div class="stat"><strong>RPO</strong><span>Registered Product Owner with complementary Scrum leadership training</span></div>
+            <div class="stat"><strong>24/7</strong><span>hands-on systems, automation, monitoring, and operations practice</span></div>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="product">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Product &amp; delivery</p>
+          <h2>From an unclear need to a dependable release.</h2>
+          <p>At Dell, I owned roadmaps and backlogs for internal technology products, translated business and engineering needs into actionable work, and coordinated delivery across product, development, QA, support, and field stakeholders.</p>
+        </div>
+
+        <div class="product-cycle reveal" aria-label="Product delivery lifecycle">
+          <div class="cycle-step"><small>01</small><strong>Discover the need</strong></div>
+          <div class="cycle-step"><small>02</small><strong>Align outcomes</strong></div>
+          <div class="cycle-step"><small>03</small><strong>Prioritize the backlog</strong></div>
+          <div class="cycle-step"><small>04</small><strong>Deliver &amp; validate</strong></div>
+          <div class="cycle-step"><small>05</small><strong>Release &amp; learn</strong></div>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <span class="card-number">DIRECTION</span>
+            <h3>Roadmaps, priorities, and stakeholder alignment</h3>
+            <p>Connect business objectives, user needs, technical constraints, and dependencies to a roadmap and backlog the team can act on. Make tradeoffs visible and keep priorities tied to outcomes.</p>
+            <div class="card-meta"><span>Roadmaps</span><span>Backlog ownership</span><span>Prioritization</span><span>Stakeholders</span></div>
+          </article>
+
+          <article class="product-card reveal">
+            <span class="card-number">DEFINITION</span>
+            <h3>Technical requirements teams can build from</h3>
+            <p>Translate complex requests into user stories, acceptance criteria, business rules, validation logic, and clear decisions—while partnering with engineers on feasibility and implementation tradeoffs.</p>
+            <div class="card-meta"><span>User stories</span><span>Acceptance criteria</span><span>Business rules</span><span>Dependencies</span></div>
+          </article>
+
+          <article class="product-card reveal">
+            <span class="card-number">DELIVERY</span>
+            <h3>Cross-functional execution through release</h3>
+            <p>Coordinate Product, Engineering, QA, Support, and field teams around integration, testing, release readiness, upgrades, deployments, and issue resolution so delivery stays predictable.</p>
+            <div class="card-meta"><span>Agile / Scrum</span><span>QA &amp; integration</span><span>Release readiness</span><span>Risk management</span></div>
+          </article>
+
+          <article class="product-card reveal">
+            <span class="card-number">ADOPTION</span>
+            <h3>Change that works beyond launch day</h3>
+            <p>Support platform migrations, workflow improvements, presentations, training, and onboarding so the product is understood, adopted, and improved through real user feedback.</p>
+            <div class="card-meta"><span>Platform migration</span><span>Training</span><span>Enablement</span><span>Continuous improvement</span></div>
+          </article>
+        </div>
+
+        <div class="product-credentials reveal" aria-label="Product and Agile credentials">
+          <span class="credential-pill">Registered Product Owner (RPO) · Scrum Inc. · Jan 2024</span>
+          <span class="credential-pill">Registered Scrum Master (RSM) · Scrum Inc. · Jan 2024</span>
+          <span class="credential-pill">Atlassian Agile Project Management Professional Certificate · Aug 2026</span>
+          <span class="credential-pill">SAFe 4 Agilist · 2019</span>
         </div>
       </div>
     </section>
@@ -1276,8 +1418,8 @@
         <div class="contact-panel reveal">
           <div>
             <p class="eyebrow">Get in touch</p>
-            <h2>Let's talk systems.</h2>
-            <p>For professional opportunities, technical collaboration, or a good infrastructure rabbit hole, email is the best place to reach me.</p>
+            <h2>Let's build the right thing.</h2>
+            <p>For Product Owner, technical product, delivery, systems, or engineering opportunities, email is the best place to reach me.</p>
           </div>
           <div class="contact-actions">
             <a class="button button-primary" href="mailto:jobs@sherga.net">Email me</a>
