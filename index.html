@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Matt Sherga's portfolio: systems engineering, software, infrastructure, automation, data, professional credentials, and homelab projects.">
+  <meta name="description" content="Matt Sherga's portfolio across product ownership, technical delivery, platform development, systems engineering, data, and homelab projects.">
   <meta name="author" content="Matt Sherga">
   <meta name="theme-color" content="#07101d">
-  <meta property="og:title" content="Matt Sherga | Systems, Software & Infrastructure">
-  <meta property="og:description" content="Projects spanning virtualization, networking, automation, data, professional credentials, and secure self-hosted infrastructure.">
+  <meta property="og:title" content="Matt Sherga | Product, Platforms & Systems">
+  <meta property="og:description" content="Explore Matt Sherga's experience through two connected paths: product and technical delivery, or systems and platform engineering.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sherga.net/">
-  <title>Matt Sherga | Systems, Software & Infrastructure</title>
+  <title>Matt Sherga | Product, Platforms & Systems</title>
 
   <style>
     :root {
@@ -179,11 +179,12 @@
 
     .hero {
       min-height: calc(100vh - 72px);
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(310px, 0.8fr);
-      align-items: center;
-      gap: clamp(42px, 8vw, 96px);
       padding: 82px 0 74px;
+    }
+
+    .hero-intro {
+      max-width: 980px;
+      margin-bottom: 44px;
     }
 
     .eyebrow {
@@ -213,9 +214,9 @@
     }
 
     h1 {
-      max-width: 850px;
+      max-width: 950px;
       margin-bottom: 24px;
-      font-size: clamp(3.2rem, 8vw, 7.2rem);
+      font-size: clamp(3.2rem, 7vw, 6.4rem);
       line-height: 0.94;
       letter-spacing: -0.065em;
     }
@@ -241,10 +242,128 @@
     }
 
     .hero-copy {
-      max-width: 760px;
-      margin-bottom: 32px;
+      max-width: 880px;
+      margin-bottom: 0;
       color: #bdcad9;
       font-size: clamp(1.08rem, 1.7vw, 1.34rem);
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .identity-card {
+      position: relative;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(26px, 3.8vw, 42px);
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(16, 34, 58, 0.94), rgba(8, 22, 38, 0.88));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .identity-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-2), transparent 72%);
+    }
+
+    .identity-card.technical::before {
+      background: linear-gradient(90deg, var(--accent), transparent 72%);
+    }
+
+    .identity-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(89, 216, 255, 0.38);
+    }
+
+    .identity-label,
+    .role-meta,
+    .training-label {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--accent-2);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .identity-card.technical .identity-label {
+      color: var(--accent);
+    }
+
+    .identity-card h2 {
+      margin-bottom: 15px;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.02;
+    }
+
+    .identity-summary {
+      color: #c1cfdd;
+    }
+
+    .identity-facts,
+    .role-list {
+      margin: 7px 0 26px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .identity-facts li,
+    .role-list li {
+      position: relative;
+      padding: 11px 0 11px 22px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .identity-facts li::before,
+    .role-list li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-2);
+      font-weight: 900;
+    }
+
+    .identity-card.technical .identity-facts li::before {
+      color: var(--accent);
+    }
+
+    .identity-link {
+      align-self: flex-start;
+      margin-top: auto;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .identity-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .identity-card .terminal-card {
+      margin: 4px 0 26px;
+      border-radius: 17px;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .identity-card .terminal-body {
+      padding: 18px 20px;
+      font-size: 0.78rem;
+      line-height: 1.7;
     }
 
     .hero-actions,
@@ -391,6 +510,8 @@
     }
 
     .panel,
+    .role-card,
+    .training-panel,
     .project-card,
     .study-card,
     .service-card,
@@ -443,6 +564,81 @@
     .stat span {
       color: var(--muted);
       font-size: 0.88rem;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .role-card {
+      padding: 28px;
+    }
+
+    .role-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.35rem;
+    }
+
+    .role-company {
+      margin-bottom: 18px;
+      color: #dbe7f3;
+      font-weight: 700;
+    }
+
+    .role-list {
+      margin-bottom: 0;
+    }
+
+    .role-list li {
+      font-size: 0.93rem;
+    }
+
+    .training-panel {
+      margin-top: 20px;
+      padding: clamp(25px, 4vw, 38px);
+    }
+
+    .training-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .training-heading h3,
+    .training-heading p {
+      margin-bottom: 0;
+    }
+
+    .training-heading p {
+      color: var(--muted);
+    }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .training-item {
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+    }
+
+    .training-item strong,
+    .training-item span {
+      display: block;
+    }
+
+    .training-item span {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.86rem;
     }
 
     .credentials-grid {
@@ -824,8 +1020,12 @@
     }
 
     @media (max-width: 980px) {
-      .hero,
       .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .identity-grid,
+      .role-grid {
         grid-template-columns: 1fr;
       }
 
@@ -834,7 +1034,7 @@
         padding-top: 60px;
       }
 
-      .terminal-card {
+      .hero > .terminal-card {
         max-width: 680px;
         transform: none;
       }
@@ -864,6 +1064,11 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .training-heading {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
     }
 
     @media (max-width: 680px) {
@@ -879,6 +1084,7 @@
       .stack-grid,
       .metrics-grid,
       .services-grid,
+      .training-grid,
       .architecture-map,
       .stats {
         grid-template-columns: 1fr;
@@ -975,12 +1181,11 @@
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#product-delivery">Product &amp; Delivery</a></li>
         <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#projects">Technical Work</a></li>
         <li><a href="#homelab">Homelab</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#case-studies">Case Studies</a></li>
-        <li><a href="#services">Lab Access</a></li>
+        <li><a href="#case-studies">Data Studies</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -988,64 +1193,131 @@
 
   <main id="main-content">
     <section class="shell hero" id="home">
-      <div>
-        <p class="eyebrow">Systems · Software · Infrastructure</p>
-        <h1>Building systems that <span class="gradient-text">work together.</span></h1>
-        <p class="hero-copy">I design, automate, and troubleshoot environments spanning software, virtualization, networking, storage, data, and home automation—then make the complicated parts manageable.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects">Explore my work</a>
-          <a class="button button-secondary" href="mailto:jobs@sherga.net">Email me</a>
-        </div>
-        <div class="hero-tags" aria-label="Core technologies">
-          <span class="tag">Proxmox</span>
-          <span class="tag">pfSense</span>
-          <span class="tag">Cloudflare</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Home Assistant</span>
-          <span class="tag">PowerShell</span>
-          <span class="tag">Python</span>
-        </div>
+      <div class="hero-intro">
+        <p class="eyebrow">Product ownership · Platform development · Systems engineering</p>
+        <h1>One career. <span class="gradient-text">Two ways in.</span></h1>
+        <p class="hero-copy">Across more than eight years at Dell Technologies, my roles spanned product ownership, enterprise platform development, new product introduction, solution support, and global technical enablement. Explore that experience from either angle.</p>
       </div>
 
-      <aside class="terminal-card" aria-label="Homelab overview">
-        <div class="terminal-head">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="terminal-title">sherga.net / system overview</span>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line"><span class="terminal-key">platform</span><span class="terminal-value">Proxmox VE</span></div>
-          <div class="terminal-line"><span class="terminal-key">network</span><span class="terminal-value">2.5 GbE + VLANs</span></div>
-          <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">~48 TB total</span></div>
-          <div class="terminal-line"><span class="terminal-key">protected</span><span class="terminal-value">~16 TB mirrored ZFS</span></div>
-          <div class="terminal-line"><span class="terminal-key">edge</span><span class="terminal-value">pfSense + Cloudflare</span></div>
-          <div class="terminal-line"><span class="terminal-key">automation</span><span class="terminal-value">Home Assistant</span></div>
-          <div class="terminal-line"><span class="terminal-key">services</span><span class="terminal-value">Docker + LXC</span></div>
-          <div class="terminal-line"><span class="terminal-key">status</span><span class="terminal-value">Always evolving</span></div>
-        </div>
-      </aside>
+      <div class="identity-grid" aria-label="Choose a career path">
+        <article class="identity-card reveal">
+          <span class="identity-label">01 / Product &amp; delivery</span>
+          <h2>From priorities to usable technical work.</h2>
+          <p class="identity-summary">A closer look at the product ownership, cross-functional coordination, new product introduction, and technical enablement work I performed at Dell.</p>
+          <ul class="identity-facts">
+            <li>Owned the roadmap, backlog, prioritization, and delivery for Microsoft Azure knowledge-transfer and enablement initiatives.</li>
+            <li>Coordinated engineering, cloud, support, and field stakeholders around priorities, dependencies, timing, and user needs.</li>
+            <li>Led new product introductions and major platform updates across Product Management, Engineering, Development, Pre-Sales, and Support.</li>
+          </ul>
+          <a class="identity-link" href="#product-delivery">Explore product &amp; delivery experience <span aria-hidden="true">↓</span></a>
+        </article>
+
+        <article class="identity-card technical reveal">
+          <span class="identity-label">02 / Systems &amp; platforms</span>
+          <h2>Inside the systems and the details.</h2>
+          <p class="identity-summary">The enterprise platform work, scripting, infrastructure, networking, data projects, and hands-on systems that make up the technical side of my portfolio.</p>
+          <aside class="terminal-card" aria-label="Homelab overview">
+            <div class="terminal-head">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="terminal-title">sherga.net / system overview</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line"><span class="terminal-key">platform</span><span class="terminal-value">Proxmox VE</span></div>
+              <div class="terminal-line"><span class="terminal-key">network</span><span class="terminal-value">2.5 GbE + VLANs</span></div>
+              <div class="terminal-line"><span class="terminal-key">storage</span><span class="terminal-value">~48 TB total</span></div>
+              <div class="terminal-line"><span class="terminal-key">edge</span><span class="terminal-value">pfSense + Cloudflare</span></div>
+              <div class="terminal-line"><span class="terminal-key">services</span><span class="terminal-value">Docker + LXC</span></div>
+            </div>
+          </aside>
+          <a class="identity-link" href="#projects">Explore technical work <span aria-hidden="true">↓</span></a>
+        </article>
+      </div>
     </section>
 
     <section class="section" id="about">
       <div class="shell">
         <div class="section-heading reveal">
-          <h2>Technical breadth without losing the details.</h2>
-          <p>My work sits at the intersection of infrastructure, software, data, and operations. I enjoy understanding how every layer fits together—from physical hardware and network paths to applications, automations, and the people using them.</p>
+          <h2>Different roles, one through line.</h2>
+          <p>My work has crossed product ownership, platform development, technical enablement, infrastructure, and data. The consistent part is learning how the pieces fit together and turning that understanding into something people can use.</p>
         </div>
 
         <div class="about-grid">
           <article class="panel reveal">
-            <p class="panel-lead">I bring enterprise infrastructure experience, software and scripting skills, graduate-level data work, and a hands-on lab where ideas are built and tested for real.</p>
-            <p>That combination has taught me to approach technical problems from both directions: zoom out far enough to design the right system, then zoom in far enough to find the one configuration, dependency, or assumption causing trouble.</p>
-            <p>This site brings together my professional interests, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.</p>
+            <p class="panel-lead">At Dell, I worked as a Product Owner, Senior Systems Development Engineer, Software Development Lead for new product introduction, and Solutions Architect Analyst.</p>
+            <p>Those roles put me between requirements and implementation, release work and user needs, and technical detail and cross-functional communication.</p>
+            <p>This site brings together that professional experience, my product and agile credentials, technical projects, Master's-program case studies, and the self-hosted infrastructure behind sherga.net.</p>
           </article>
 
           <aside class="panel stats reveal" aria-label="Homelab statistics">
-            <div class="stat"><strong>10+</strong><span>self-hosted applications and infrastructure services</span></div>
-            <div class="stat"><strong>3</strong><span>segmented network zones for trusted, IoT, and guest devices</span></div>
-            <div class="stat"><strong>2.5G</strong><span>core Ethernet connectivity across the primary lab</span></div>
+            <div class="stat"><strong>8+</strong><span>years at Dell Technologies across four roles</span></div>
+            <div class="stat"><strong>100+</strong><span>people in recurring global technical sessions</span></div>
+            <div class="stat"><strong>3</strong><span>segmented network zones in my homelab</span></div>
             <div class="stat"><strong>24/7</strong><span>automation, monitoring, storage, and remote access</span></div>
           </aside>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="product-delivery">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Product / project lens</p>
+          <h2>Delivery experience, by role.</h2>
+          <p>These are specific responsibilities and outcomes from my Dell experience—not a generic description of product ownership or project management.</p>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card reveal">
+            <span class="role-meta">Sep 2023 — Sep 2024</span>
+            <h3>Product Owner</h3>
+            <p class="role-company">Dell Technologies</p>
+            <ul class="role-list">
+              <li>Owned the roadmap, backlog, prioritization, and delivery of Microsoft Azure knowledge-transfer and enablement initiatives supporting Dell's multicloud portfolio.</li>
+              <li>Translated evolving cloud capabilities into scoped eLearning modules, live demonstrations, presentations, readiness activities, and repeatable technical guidance.</li>
+              <li>Presented recurring live technical sessions to global audiences of more than 100 people and gathered feedback.</li>
+              <li>Created a domestic engineering team to transition knowledge-transfer work from Shanghai.</li>
+            </ul>
+          </article>
+
+          <article class="role-card reveal">
+            <span class="role-meta">Nov 2018 — Oct 2023</span>
+            <h3>Senior Systems Development Engineer</h3>
+            <p class="role-company">Dell Technologies</p>
+            <ul class="role-list">
+              <li>Developed and administered XACT, used by global pre-sales teams to configure and validate converged and hyperconverged solutions.</li>
+              <li>Partnered with product owners, engineers, project managers, support teams, and users to evaluate requirements, resolve production issues, assess feasibility, and prioritize enhancements.</li>
+              <li>Translated requirements into technical user flows, JavaScript rules, validation logic, licensing calculations, edge cases, and customer-ready bills of materials.</li>
+              <li>Supported releases and upgrades, validated outputs, demonstrated functionality, and trained users.</li>
+            </ul>
+          </article>
+
+          <article class="role-card reveal">
+            <span class="role-meta">Feb 2017 — Nov 2018</span>
+            <h3>Software Development Lead / NPI</h3>
+            <p class="role-company">Dell Technologies</p>
+            <ul class="role-list">
+              <li>Led new product introductions and major platform updates as the technical point across Product Management, Engineering, Software Development, Pre-Sales, and Support.</li>
+              <li>Coordinated quality assurance, integration and system testing, release readiness, compliance, dependencies, and issue resolution.</li>
+              <li>Established a DASH development process, tools, and forms to improve communication and handoffs.</li>
+              <li>Designed and delivered a two-week bootcamp in Bangalore.</li>
+            </ul>
+          </article>
+        </div>
+
+        <aside class="training-panel reveal" aria-label="Product and agile training and credentials">
+          <div class="training-heading">
+            <div>
+              <span class="training-label">Training &amp; credentials</span>
+              <h3>Formal product and agile study.</h3>
+            </div>
+            <p>Listed separately from professional experience so the distinction stays clear.</p>
+          </div>
+          <div class="training-grid">
+            <div class="training-item"><strong>Registered Product Owner &amp; Registered Scrum Master</strong><span>Scrum Inc. · January 2024</span></div>
+            <div class="training-item"><strong>Agile Project Management Professional Certificate</strong><span>Atlassian · August 2026</span></div>
+            <div class="training-item"><strong>SAFe 4 Agilist</strong><span>Scaled Agile · 2019</span></div>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -1088,7 +1360,7 @@
     <section class="section" id="projects">
       <div class="shell">
         <div class="section-heading reveal">
-          <h2>Selected projects.</h2>
+          <h2>Selected technical work.</h2>
           <p>Practical systems built to solve real problems, with operational tradeoffs and failure modes treated as part of the design.</p>
         </div>
 
@@ -1276,8 +1548,8 @@
         <div class="contact-panel reveal">
           <div>
             <p class="eyebrow">Get in touch</p>
-            <h2>Let's talk systems.</h2>
-            <p>For professional opportunities, technical collaboration, or a good infrastructure rabbit hole, email is the best place to reach me.</p>
+            <h2>Let's talk about what you're building.</h2>
+            <p>For product ownership, project and technical delivery, systems or platform engineering opportunities, or technical collaboration, email is the best place to reach me.</p>
           </div>
           <div class="contact-actions">
             <a class="button button-primary" href="mailto:jobs@sherga.net">Email me</a>
